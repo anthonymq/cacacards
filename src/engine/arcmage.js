@@ -225,6 +225,17 @@ export function totalAvailableResources(p) {
   return Object.keys(p.resources).reduce((acc, f) => acc + availableResources(p, f), 0)
 }
 
+export function resourceSummary(p, factions) {
+  const out = []
+  for (const f of factions) {
+    const r = p.resources[f]
+    const total = r ? r.cards.length : 0
+    const avail = r ? r.cards.filter((x) => !x.marked).length : 0
+    out.push({ faction: f, avail, total })
+  }
+  return out
+}
+
 export function canPayCardNow(state, who, card) {
   if (state.gameOver) return { ok: false, reason: 'Game over' }
   if (state.current !== who) return { ok: false, reason: 'Not your turn' }

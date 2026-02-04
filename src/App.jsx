@@ -11,6 +11,7 @@ import {
   canPayCardNow,
   moveCreature,
   resolveAttack,
+  resourceSummary,
 } from './engine/arcmage.js'
 
 function Pill({ children }) {
@@ -86,6 +87,7 @@ export default function App() {
   const [seed, setSeed] = useState(1)
   const initial = useMemo(() => createInitialState(), [seed])
   const [state, setState] = useState(initial)
+  const FACTIONS = ['Gaian', 'Dark Legion', 'Red Banner', 'House of Nobles', 'The Empire']
   const [resourceFaction, setResourceFaction] = useState('Gaian')
 
   const you = state.player
@@ -146,6 +148,22 @@ export default function App() {
         </div>
       </div>
 
+      <div className="board" style={{ marginTop: 12 }}>
+        <div className="boardTitle">
+          <div>Resources (available / total)</div>
+          <div className="footerHint" style={{ marginTop: 0 }}>
+            Loyalty must be paid with the card’s faction resources.
+          </div>
+        </div>
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+          {resourceSummary(you, FACTIONS).map((r) => (
+            <span key={r.faction} className="pill">
+              {r.faction}: {r.avail}/{r.total}
+            </span>
+          ))}
+        </div>
+      </div>
+
       {isYourTurn && state.phase === 'draw_resource' && !state.gameOver ? (
         <div className="board" style={{ marginTop: 12 }}>
           <div className="boardTitle">
@@ -158,7 +176,7 @@ export default function App() {
           </div>
 
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-            {['Gaian', 'Dark Legion', 'Red Banner', 'House of Nobles', 'The Empire'].map((f) => (
+            {FACTIONS.map((f) => (
               <button
                 key={f}
                 onClick={() => setResourceFaction(f)}
