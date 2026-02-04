@@ -113,7 +113,9 @@ export function createInitialState(opts = {}) {
     log: ['Game start'],
     gameOver: false,
     winner: null,
-    // combat selection
+    // WIP combat prompts
+    pendingDefense: null,
+    // legacy (unused)
     selectedAttackerId: null,
     selectedDefenderCityId: null,
     player: mkPlayer('You', deckA),
@@ -574,64 +576,145 @@ export function canAttackCity(state, who, attackerIds, targetCityId) {
   return true
 }
 
+function getAvailableDefenders(defP, targetCity) {
+  return [...defP.army, ...targetCity.residents].filter((c) => !c.marked)
+}
+
+function resolveAttackWithAssignments(state, who, attackerIds, targetCityId, assignmentsObj) {
+  const atkP = state[who]
+  const defWho = who === 'player' ? 'enemy' : 'player'
+  const defP = state[defWho]
+  const targetCity = defP.kingdom.find((c) => c.id === targetCityId)
+  if (!targetCity) return
+
+  const attackers = attackerIds.map((id) => atkP.army.find((c) => c.id === id)).filter(Boolean)
+
+  // mark attackers after event window (events not implemented yet)
+  for (const a of attackers) a.marked = true
+
+  // normalize assignments: attackerId -> defenders[]
+  const assignments = new Map()
+  for (const a of attackers) assignments.set(a.id, [])
+  for (const [attId, defIds] of Object.entries(assignmentsObj || {})) {
+    const a = attackers.find((x) => x.id === attId)
+    if (!a) continue
+
+    const chosen = []
+    for (const defId of defIds || []) {
+      // defender can be in defending army or city residents
+      const d = defP.army.find((x) => x.id === defId) || targetCity.residents.find((x) => x.id === defId)
+      if (d && !d.marked) chosen.push(d)
+    }
+    assignments.set(attId, chosen)
+  }
+
+  // Enforce: a defender can only defend against one attacker
+  const used = new Set()
+  for (const [attId, defs] of assignments.entries()) {
+    const filtered = []
+    for (const d of defs) {
+      if (used.has(d.id)) continue
+      used.add(d.id)
+      filtered.push(d)
+    }
+    assignments.set(attId, filtered)
+  }
+
+  // Resolve each attacker battle in declared order
+  for (const a of attackers) {
+    const defs = assignments.get(a.id) || []
+
+    if (defs.length === 0) {
+      targetCity.currentDefense -= a.atk
+      state.log.unshift(`${atkP.name}'s ${a.name} hits ${targetCity.card.name} for ${a.atk}.`)
+      continue
+    }
+
+    const dmgToAttacker = defs.reduce((s, d) => s + d.atk, 0)
+    a.damage += dmgToAttacker
+
+    // distribute all attacker damage to the first defender (UI for split TBD)
+    defs[0].damage += a.atk
+
+    state.log.unshift(`${atkP.name}'s ${a.name} battles ${defs.map((d) => d.name).join(', ')}.`)
+  }
+
+  cleanupDeaths(state)
+
+  if (targetCity.currentDefense <= 0) {
+    destroyCity(state, defWho, targetCity.id)
+  }
+
+  checkWin(state)
+}
+
 export function resolveAttack(state, who, attackerIds, targetCityId) {
   if (!canAttackCity(state, who, attackerIds, targetCityId)) return
 
   const atkP = state[who]
   const defWho = who === 'player' ? 'enemy' : 'player'
   const defP = state[defWho]
-
   const targetCity = defP.kingdom.find((c) => c.id === targetCityId)
+  if (!targetCity) return
 
   const attackers = attackerIds.map((id) => atkP.army.find((c) => c.id === id)).filter(Boolean)
-  // mark attackers after event window (events not implemented yet)
-  for (const a of attackers) a.marked = true
+  if (!attackers.length) return
 
-  // Defender assignment not interactive yet: simple auto-assign for now.
-  // Defenders can come from defending army + attacked city's residents, unmarked only.
-  const availableDef = [...defP.army, ...targetCity.residents].filter((c) => !c.marked)
+  // If the defender is the human player AND attacker is enemy, prompt for defense assignment.
+  if (who === 'enemy') {
+    const available = getAvailableDefenders(defP, targetCity)
 
-  // Greedy assignment: one defender per attacker if possible.
-  const assignments = new Map() // attackerId -> [defenders]
-  for (const a of attackers) assignments.set(a.id, [])
+    state.pendingDefense = {
+      attacker: who,
+      defender: defWho,
+      targetCityId,
+      attackerIds: attackers.map((a) => a.id),
+      defenderIds: available.map((d) => d.id),
+      assignments: {},
+    }
 
+    state.log.unshift(`Defense step: choose blockers for ${targetCity.card.name}.`)
+    return
+  }
+
+  // Player attacking enemy: keep simple auto-assign for now.
+  const availableDef = getAvailableDefenders(defP, targetCity)
+  const assignments = {}
   let di = 0
   for (const a of attackers) {
     if (di >= availableDef.length) break
-    assignments.get(a.id).push(availableDef[di])
+    assignments[a.id] = [availableDef[di].id]
     di += 1
   }
 
-  // Resolve each attacker battle in declared order (as provided)
-  for (const a of attackers) {
-    const defs = assignments.get(a.id) || []
+  resolveAttackWithAssignments(state, who, attackerIds, targetCityId, assignments)
+}
 
-    if (defs.length === 0) {
-      // unblocked -> city takes damage equal to ATK
-      targetCity.currentDefense -= a.atk
-      state.log.unshift(`${atkP.name}'s ${a.name} hits ${targetCity.card.name} for ${a.atk}.`)
-      continue
+export function setDefenseAssignment(state, attackerId, defenderId) {
+  const pd = state.pendingDefense
+  if (!pd) return
+
+  const current = pd.assignments[attackerId] || []
+  const isAssigned = current.includes(defenderId)
+  if (isAssigned) {
+    pd.assignments[attackerId] = current.filter((x) => x !== defenderId)
+  } else {
+    // remove defender from any other attacker (one defender per attacker)
+    for (const k of Object.keys(pd.assignments)) {
+      pd.assignments[k] = (pd.assignments[k] || []).filter((x) => x !== defenderId)
     }
-
-    // simultaneous: attacker takes sum(def atk)
-    const dmgToAttacker = defs.reduce((s, d) => s + d.atk, 0)
-    a.damage += dmgToAttacker
-
-    // attacker deals its ATK; for now: distribute all to first defender
-    defs[0].damage += a.atk
-
-    state.log.unshift(`${atkP.name}'s ${a.name} battles ${defs.map((d) => d.name).join(', ')}.`)
+    pd.assignments[attackerId] = [...current, defenderId]
   }
+}
 
-  // Cleanup: dead creatures to owner graveyard, attachments ignored
-  cleanupDeaths(state)
+export function confirmDefense(state) {
+  const pd = state.pendingDefense
+  if (!pd) return
 
-  // City destruction check
-  if (targetCity.currentDefense <= 0) {
-    destroyCity(state, defWho, targetCity.id)
-  }
+  const { attacker, attackerIds, targetCityId, assignments } = pd
+  state.pendingDefense = null
 
-  checkWin(state)
+  resolveAttackWithAssignments(state, attacker, attackerIds, targetCityId, assignments)
 }
 
 function removeCreatureFromZones(p, creatureId) {
@@ -862,6 +945,8 @@ function runEnemyAI(state) {
     const attackers = p.army.filter((c) => !c.marked)
     if (enemyCity && attackers.length) {
       resolveAttack(state, who, attackers.map((a) => a.id), enemyCity.id)
+      // If defense prompt is triggered, pause here (player must assign defenders)
+      if (state.pendingDefense) return
     }
     nextPhase(state)
     return
