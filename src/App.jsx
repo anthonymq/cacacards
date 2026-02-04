@@ -8,6 +8,7 @@ import {
   chooseDrawResourceOption,
   playCreatureToCity,
   canPlayCardToCity,
+  canPayCardNow,
   moveCreature,
   resolveAttack,
 } from './engine/arcmage.js'
@@ -28,7 +29,7 @@ function CardImage({ src, alt }) {
   )
 }
 
-function HandCard({ card, onClick, disabled, label }) {
+function HandCard({ card, onClick, disabled, label, hint }) {
   return (
     <div className={['card', disabled ? 'danger' : ''].join(' ').trim()}>
       <div className="cardTitle">{card.name}</div>
@@ -38,6 +39,7 @@ function HandCard({ card, onClick, disabled, label }) {
       </div>
       <CardImage src={card.image} alt={card.name} />
       <div className="cardText" style={{ whiteSpace: 'pre-wrap' }}>{card.ruleText || ''}</div>
+      {hint ? <div className="footerHint" style={{ marginTop: 8 }}>{hint}</div> : null}
       <div className="cardBtnRow">
         <button onClick={onClick} disabled={disabled}>
           {label}
@@ -238,12 +240,17 @@ export default function App() {
             const inDR = state.phase === 'draw_resource'
             const inPlay = state.phase === 'play_1' || state.phase === 'play_2'
 
+            const pay = canPayCardNow(state, 'player', c)
             const canRes = inDR && canPlayResource(state, 'player')
             const canPlayHere = inPlay && !!you.kingdom[0] && canPlayCardToCity(state, 'player', c.id, you.kingdom[0].id)
 
             const label = inDR
               ? (you.drawResourceChoice ? (canRes ? 'Resource' : 'Limit reached') : 'Choose option')
               : (inPlay ? (canPlayHere ? 'Play' : 'Cannot') : '—')
+
+            const hint = inPlay
+              ? (pay.ok ? 'Playable (cost + loyalty OK)' : `Not playable: ${pay.reason}`)
+              : (inDR ? 'Tip: A resource can be ANY faction. Pick the faction you need for loyalty.' : null)
 
             const disabled =
               !isYourTurn ||
@@ -257,6 +264,7 @@ export default function App() {
                 key={c.id}
                 card={c}
                 label={label}
+                hint={hint}
                 disabled={disabled}
                 onClick={() => {
                   setState((prev) => {
@@ -265,7 +273,6 @@ export default function App() {
 
                     if (s.phase === 'draw_resource') {
                       if (canPlayResource(s, 'player')) {
-                        // In ArcMage rules, a resource can be of any faction (not necessarily the card's faction)
                         playResource(s, 'player', c.id, resourceFaction)
                       }
                       return s
