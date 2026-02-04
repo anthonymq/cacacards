@@ -221,6 +221,36 @@ export function availableResources(p, faction) {
   return r.cards.filter((x) => !x.marked).length
 }
 
+export function totalAvailableResources(p) {
+  return Object.keys(p.resources).reduce((acc, f) => acc + availableResources(p, f), 0)
+}
+
+export function canPayCardNow(state, who, card) {
+  if (state.gameOver) return { ok: false, reason: 'Game over' }
+  if (state.current !== who) return { ok: false, reason: 'Not your turn' }
+  if (!(state.phase === 'play_1' || state.phase === 'play_2')) return { ok: false, reason: 'Not in Play phase' }
+  if (!card) return { ok: false, reason: 'Missing card' }
+  if (String(card.type || '').toLowerCase() !== 'creature') return { ok: false, reason: 'Only creatures supported (WIP)' }
+
+  const p = state[who]
+  const cost = nint(card.cost, 0)
+  const loyalty = Math.max(0, nint(card.loyalty, 0))
+  const faction = card.faction || 'Unknown'
+
+  if (cost <= 0) return { ok: false, reason: 'Invalid cost' }
+
+  const total = totalAvailableResources(p)
+  if (total < cost) return { ok: false, reason: `Need ${cost} total resources (have ${total})` }
+
+  const neededLoy = Math.min(cost, loyalty)
+  const haveFaction = availableResources(p, faction)
+  if (haveFaction < neededLoy) {
+    return { ok: false, reason: `Need ${neededLoy} ${faction} resources for loyalty (have ${haveFaction})` }
+  }
+
+  return { ok: true, reason: 'OK' }
+}
+
 export function markResources(p, faction, n) {
   const r = p.resources[faction]
   if (!r) return false
