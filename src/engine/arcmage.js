@@ -236,6 +236,42 @@ export function resourceSummary(p, factions) {
   return out
 }
 
+export function recommendResourceFaction(state, who, factions) {
+  // Heuristic: pick the faction that would unlock the most currently-playable creatures
+  // based on loyalty needs, assuming you add +1 available resource of that faction.
+  const p = state[who]
+  let best = factions[0]
+  let bestScore = -1
+
+  const handCreatures = p.hand.filter((c) => String(c.type || '').toLowerCase() === 'creature')
+
+  for (const f of factions) {
+    let score = 0
+
+    for (const c of handCreatures) {
+      // simulate +1 resource of faction f
+      const cost = nint(c.cost, 0)
+      const loyalty = Math.max(0, nint(c.loyalty, 0))
+      const neededLoy = Math.min(cost, loyalty)
+
+      const factionAvail = availableResources(p, c.faction || 'Unknown') + (c.faction === f ? 1 : 0)
+      const totalAvail = totalAvailableResources(p) + 1
+
+      const okTotal = totalAvail >= cost
+      const okLoy = factionAvail >= neededLoy
+
+      if (okTotal && okLoy) score += 1
+    }
+
+    if (score > bestScore) {
+      bestScore = score
+      best = f
+    }
+  }
+
+  return best
+}
+
 export function canPayCardNow(state, who, card) {
   if (state.gameOver) return { ok: false, reason: 'Game over' }
   if (state.current !== who) return { ok: false, reason: 'Not your turn' }

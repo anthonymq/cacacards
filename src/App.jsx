@@ -12,6 +12,7 @@ import {
   moveCreature,
   resolveAttack,
   resourceSummary,
+  recommendResourceFaction,
 } from './engine/arcmage.js'
 
 function Pill({ children }) {
@@ -89,6 +90,16 @@ export default function App() {
   const [state, setState] = useState(initial)
   const FACTIONS = ['Gaian', 'Dark Legion', 'Red Banner', 'House of Nobles', 'The Empire']
   const [resourceFaction, setResourceFaction] = useState('Gaian')
+
+  // Auto-pick a good default resource faction based on your current hand.
+  React.useEffect(() => {
+    if (state.current !== 'player') return
+    if (state.phase !== 'draw_resource') return
+    if (state.player.drawResourceChoice == null) return
+    const rec = recommendResourceFaction(state, 'player', FACTIONS)
+    if (rec && rec !== resourceFaction) setResourceFaction(rec)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.turn, state.phase, state.current, state.player.drawResourceChoice])
 
   const you = state.player
   const enemy = state.enemy
@@ -173,6 +184,21 @@ export default function App() {
               <Pill>Resources this turn: {you.resourcesPlayedThisTurn}/{you.resourcesMaxThisTurn}</Pill>
               <Pill>Next resource faction: {resourceFaction}</Pill>
             </div>
+          </div>
+
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
+            <button
+              onClick={() => {
+                const rec = recommendResourceFaction(state, 'player', FACTIONS)
+                if (rec) setResourceFaction(rec)
+              }}
+              disabled={!you.drawResourceChoice}
+            >
+              Auto-pick faction
+            </button>
+            <span className="footerHint" style={{ marginTop: 0 }}>
+              Picks a faction that best satisfies <b>loyalty</b> for cards in your hand.
+            </span>
           </div>
 
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
