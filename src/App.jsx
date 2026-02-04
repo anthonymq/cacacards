@@ -50,6 +50,7 @@ import {
   resourceSummary,
   recommendResourceFaction,
 } from './engine/arcmage.js'
+import { DECKS } from './data/decks/index.js'
 
 function Pill({ children }) {
   return <span className="pill">{children}</span>
@@ -164,8 +165,12 @@ function City({ city, children }) {
 
 export default function App() {
   const [seed, setSeed] = useState(1)
-  const initial = useMemo(() => createInitialState(), [seed])
+  const [playerDeckId, setPlayerDeckId] = useState('gaian-love-for-life')
+  const [enemyDeckId, setEnemyDeckId] = useState('brothers-in-arms')
+
+  const initial = useMemo(() => createInitialState({ playerDeckId, enemyDeckId }), [seed, playerDeckId, enemyDeckId])
   const [state, setState] = useState(initial)
+
   const FACTIONS = ['Gaian', 'Dark Legion', 'Red Banner', 'House of Nobles', 'The Empire']
   const [resourceFaction, setResourceFaction] = useState('Gaian')
 
@@ -305,7 +310,51 @@ export default function App() {
           <Pill>Phase: {state.phase}</Pill>
           <button onClick={advanceUntilPlayerAction} disabled={state.gameOver}>Continue</button>
           <button onClick={advance} disabled={state.gameOver}>Next phase</button>
-          <button onClick={() => setSeed((x) => x + 1)}>New game</button>
+          <button
+            onClick={() => {
+              setSeed((x) => x + 1)
+              // reset state immediately for snappier UX
+              setState(createInitialState({ playerDeckId, enemyDeckId }))
+            }}
+          >
+            New game
+          </button>
+        </div>
+      </div>
+
+      <div className="board" style={{ marginTop: 12 }}>
+        <div className="boardTitle">
+          <div>Decks</div>
+          <div className="footerHint" style={{ marginTop: 0 }}>Preconstructed decks from aminduna.arcmage.org</div>
+        </div>
+        <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
+          <span className="pill">You</span>
+          <select
+            value={playerDeckId}
+            onChange={(e) => {
+              const v = e.target.value
+              setPlayerDeckId(v)
+              setState(createInitialState({ playerDeckId: v, enemyDeckId }))
+            }}
+          >
+            {DECKS.map((d) => (
+              <option key={d.id} value={d.id}>{d.name}</option>
+            ))}
+          </select>
+
+          <span className="pill">Enemy</span>
+          <select
+            value={enemyDeckId}
+            onChange={(e) => {
+              const v = e.target.value
+              setEnemyDeckId(v)
+              setState(createInitialState({ playerDeckId, enemyDeckId: v }))
+            }}
+          >
+            {DECKS.map((d) => (
+              <option key={d.id} value={d.id}>{d.name}</option>
+            ))}
+          </select>
         </div>
       </div>
 
