@@ -174,6 +174,8 @@ export default function App() {
   const [phaseFlash, setPhaseFlash] = useState(null) // string
   const [damageFloats, setDamageFloats] = useState([])
   const [hitIds, setHitIds] = useState([])
+  const [toast, setToast] = useState(null)
+  const [prevLogLen, setPrevLogLen] = useState(0)
 
   // Auto-pick a good default resource faction based on your current hand.
   React.useEffect(() => {
@@ -198,6 +200,25 @@ export default function App() {
       setSelectedAttackers([])
     }
   }, [state.phase, state.current])
+
+  // Toast on new log entries (helps readability for enemy actions)
+  React.useEffect(() => {
+    const len = state.log?.length || 0
+    if (prevLogLen === 0) {
+      setPrevLogLen(len)
+      return
+    }
+
+    if (len > prevLogLen) {
+      const newest = state.log[0]
+      if (newest) {
+        const who = newest.startsWith('Enemy') ? 'enemy' : (newest.startsWith('You') ? 'player' : 'system')
+        setToast({ text: newest, who })
+        setTimeout(() => setToast(null), 1400)
+      }
+      setPrevLogLen(len)
+    }
+  }, [state.log, prevLogLen])
 
   const you = state.player
   const enemy = state.enemy
@@ -263,6 +284,13 @@ export default function App() {
           -{d.amount}
         </div>
       ))}
+
+      {toast ? (
+        <div className={['toast', toast.who === 'enemy' ? 'toastEnemy' : (toast.who === 'player' ? 'toastPlayer' : '')].join(' ')}>
+          <div style={{ fontWeight: 900, marginBottom: 2 }}>{toast.who === 'enemy' ? 'ENEMY' : (toast.who === 'player' ? 'YOU' : 'INFO')}</div>
+          <div>{toast.text}</div>
+        </div>
+      ) : null}
 
       <div className="topbar">
         <div>
@@ -393,7 +421,9 @@ export default function App() {
 
       <div className="board">
         <div className="boardTitle">
-          <div>Enemy</div>
+          <div>
+            Enemy {state.current === 'enemy' ? <span className="pill" style={{ background: 'rgba(255,90,90,0.18)', borderColor: 'rgba(255,90,90,0.45)' }}>Acting…</span> : null}
+          </div>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
             <Pill>Cities: {enemy.kingdom.length}</Pill>
             <Pill>Army: {enemy.army.length}</Pill>
@@ -581,11 +611,21 @@ export default function App() {
       <div className="board">
         <div className="boardTitle">
           <div>Log</div>
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+            <span className="pill" style={{ background: 'rgba(98,255,168,0.12)', borderColor: 'rgba(98,255,168,0.35)' }}>You</span>
+            <span className="pill" style={{ background: 'rgba(255,90,90,0.12)', borderColor: 'rgba(255,90,90,0.35)' }}>Enemy</span>
+          </div>
         </div>
-        <div style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace', fontSize: 12, opacity: 0.9 }}>
-          {state.log.slice(0, 14).map((l, i) => (
-            <div key={i}>{l}</div>
-          ))}
+        <div style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace', fontSize: 12, opacity: 0.95 }}>
+          {state.log.slice(0, 18).map((l, i) => {
+            const isEnemy = l.startsWith('Enemy')
+            const isYou = l.startsWith('You')
+            return (
+              <div key={i} style={{ padding: '2px 0', color: isEnemy ? '#ffb3b3' : (isYou ? '#b6ffd4' : '#f3f0e6') }}>
+                {l}
+              </div>
+            )
+          })}
         </div>
       </div>
     </div>
