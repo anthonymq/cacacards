@@ -194,20 +194,33 @@ export default function App() {
         <div className="handTitle">Your hand</div>
         <div className="handCards">
           {you.hand.map((c) => {
-            const canRes = canPlayResource(state, 'player')
             const inDR = state.phase === 'draw_resource'
-            const label = inDR ? (canRes ? 'Resource' : (you.drawResourceChoice ? 'Limit reached' : 'Choose option')) : 'Play'
+            const inPlay = state.phase === 'play_1' || state.phase === 'play_2'
+
+            const canRes = inDR && canPlayResource(state, 'player')
+            const canPlayHere = inPlay && !!you.kingdom[0] && canPlayCardToCity(state, 'player', c.id, you.kingdom[0].id)
+
+            const label = inDR
+              ? (you.drawResourceChoice ? (canRes ? 'Resource' : 'Limit reached') : 'Choose option')
+              : (inPlay ? (canPlayHere ? 'Play' : 'Cannot') : '—')
+
+            const disabled =
+              !isYourTurn ||
+              state.gameOver ||
+              (inDR && !canRes) ||
+              (inPlay && !canPlayHere) ||
+              (!inDR && !inPlay)
 
             return (
               <HandCard
                 key={c.id}
                 card={c}
                 label={label}
-                disabled={!isYourTurn || state.gameOver || (inDR && !canRes)}
+                disabled={disabled}
                 onClick={() => {
                   setState((prev) => {
                     const s = structuredClone(prev)
-                    if (s.current !== 'player') return s
+                    if (s.current !== 'player' || s.gameOver) return s
 
                     if (s.phase === 'draw_resource') {
                       if (canPlayResource(s, 'player')) {
@@ -216,11 +229,13 @@ export default function App() {
                       return s
                     }
 
-                    // quick UX: play creature into first city if legal
-                    const city = s.player.kingdom[0]
-                    if (city && canPlayCardToCity(s, 'player', c.id, city.id)) {
-                      playCreatureToCity(s, 'player', c.id, city.id)
+                    if (s.phase === 'play_1' || s.phase === 'play_2') {
+                      const city = s.player.kingdom[0]
+                      if (city && canPlayCardToCity(s, 'player', c.id, city.id)) {
+                        playCreatureToCity(s, 'player', c.id, city.id)
+                      }
                     }
+
                     return s
                   })
                 }}
