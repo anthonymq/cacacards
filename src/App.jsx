@@ -35,6 +35,54 @@ function phaseTintColor(phase) {
   }
 }
 
+function EnemyTurnTimeline({ currentPhase, active }) {
+  const steps = [
+    { id: 'unmark', label: 'Unmark' },
+    { id: 'draw_resource', label: 'Draw' },
+    { id: 'tactics', label: 'Tactics' },
+    { id: 'play_1', label: 'Play' },
+    { id: 'attack', label: 'Attack' },
+    { id: 'play_2', label: 'Play' },
+    { id: 'discard', label: 'Discard' },
+  ]
+
+  const idx = steps.findIndex((s) => s.id === currentPhase)
+
+  return (
+    <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
+      <span className="pill" style={{ background: 'rgba(255,90,90,0.12)', borderColor: 'rgba(255,90,90,0.30)' }}>
+        Enemy turn
+      </span>
+      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
+        {steps.map((s, i) => {
+          const isNow = active && s.id === currentPhase
+          const done = active && i < idx
+          const baseBg = done ? 'rgba(255, 90, 90, 0.22)' : 'rgba(255, 90, 90, 0.10)'
+          const bg = isNow ? 'rgba(255, 214, 102, 0.18)' : baseBg
+          const border = isNow ? 'rgba(255, 214, 102, 0.55)' : 'rgba(255,90,90,0.22)'
+
+          return (
+            <span
+              key={s.id}
+              className="pill"
+              style={{
+                padding: '5px 9px',
+                background: bg,
+                borderColor: border,
+                color: isNow ? '#ffe7a3' : '#f3f0e6',
+                fontWeight: isNow ? 900 : 700,
+              }}
+              title={s.label}
+            >
+              {s.label}
+            </span>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
 import {
   createInitialState,
   nextPhase,
@@ -431,6 +479,10 @@ export default function App() {
             <Pill>Hand: {enemy.hand.length}</Pill>
           </div>
         </div>
+
+        {state.current === 'enemy' ? (
+          <EnemyTurnTimeline currentPhase={state.phase} active={state.current === 'enemy'} />
+        ) : null}
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
           {enemy.kingdom.map((c) => {
             const targetable = isYourTurn && state.phase === 'attack' && selectedAttackers.length > 0
