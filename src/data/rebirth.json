@@ -1,0 +1,960 @@
+{
+  "source": {
+    "deckGuid": "2e852216-450b-4b2f-add3-e5126197e149",
+    "deckName": "Set 1 -  Rebirth (full set)",
+    "base": "https://aminduna.arcmage.org",
+    "license": "https://arcmage.org/license/"
+  },
+  "cards": [
+    {
+      "guid": "6e32f1b9-6721-42c1-b8cb-9d2314e37556",
+      "name": "Abduction",
+      "type": "Event",
+      "faction": "Dark Legion",
+      "cost": "3",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/6e32f1b9-6721-42c1-b8cb-9d2314e37556.webp"
+    },
+    {
+      "guid": "ccc274e8-5c75-444e-ab9c-49356c5d906a",
+      "name": "Crumbling Defenses",
+      "type": "Magic",
+      "faction": "Dark Legion",
+      "cost": "4",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/ccc274e8-5c75-444e-ab9c-49356c5d906a.webp"
+    },
+    {
+      "guid": "23d68aac-807f-4e8e-baf8-695ee79fe600",
+      "name": "Dark Portal",
+      "type": "Enchantment",
+      "faction": "Dark Legion",
+      "cost": "4",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/23d68aac-807f-4e8e-baf8-695ee79fe600.webp"
+    },
+    {
+      "guid": "4e87f673-2ecf-4aa2-b384-1cfb3fa0f30d",
+      "name": "Fear of the Dark",
+      "type": "Enchantment",
+      "faction": "Dark Legion",
+      "cost": "2",
+      "artist": "Kathrin Polikeit",
+      "artworkLicensor": "Battle for Wesnoth",
+      "image": "/arcmage/rebirth/cards/4e87f673-2ecf-4aa2-b384-1cfb3fa0f30d.webp"
+    },
+    {
+      "guid": "1c8e33b1-7a8b-43e8-b690-f99970e9f1a0",
+      "name": "Fearless Assault",
+      "type": "Event",
+      "faction": "Dark Legion",
+      "cost": "3",
+      "artist": "Emilien Rotival",
+      "artworkLicensor": "Battle for Wesnoth",
+      "image": "/arcmage/rebirth/cards/1c8e33b1-7a8b-43e8-b690-f99970e9f1a0.webp"
+    },
+    {
+      "guid": "fe68f069-6e7f-4d66-9db9-c76a4338b53d",
+      "name": "Forgiving Vampire",
+      "type": "Creature",
+      "faction": "Dark Legion",
+      "cost": "5",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/fe68f069-6e7f-4d66-9db9-c76a4338b53d.webp"
+    },
+    {
+      "guid": "e040f4e6-5826-4ff2-aa37-267d204b254d",
+      "name": "Foul Imps",
+      "type": "Creature",
+      "faction": "Dark Legion",
+      "cost": "1",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/e040f4e6-5826-4ff2-aa37-267d204b254d.webp"
+    },
+    {
+      "guid": "3fbd35fd-836a-4d15-8736-7ae35fed0f1b",
+      "name": "Ghoul",
+      "type": "Creature",
+      "faction": "Dark Legion",
+      "cost": "4",
+      "artist": "Kathrin Polikeit",
+      "artworkLicensor": "Battle for Wesnoth",
+      "image": "/arcmage/rebirth/cards/3fbd35fd-836a-4d15-8736-7ae35fed0f1b.webp"
+    },
+    {
+      "guid": "345c864e-0398-48b7-991f-1bc1e6b9c279",
+      "name": "Gigantic Spider",
+      "type": "Creature",
+      "faction": "Dark Legion",
+      "cost": "2",
+      "artist": "zookeeper",
+      "artworkLicensor": "Battle for Wesnoth",
+      "image": "/arcmage/rebirth/cards/345c864e-0398-48b7-991f-1bc1e6b9c279.webp"
+    },
+    {
+      "guid": "d82feac4-f3c7-4c0b-ab97-20d983e275a0",
+      "name": "Jevyan's Advice",
+      "type": "Magic",
+      "faction": "Dark Legion",
+      "cost": "4",
+      "artist": "Emilien Rotival",
+      "artworkLicensor": "Battle for Wesnoth",
+      "image": "/arcmage/rebirth/cards/d82feac4-f3c7-4c0b-ab97-20d983e275a0.webp"
+    },
+    {
+      "guid": "ca459abf-2452-4d92-966c-da73e55b383d",
+      "name": "Lobotomized Library",
+      "type": "City",
+      "faction": "Dark Legion",
+      "cost": "S",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/ca459abf-2452-4d92-966c-da73e55b383d.webp"
+    },
+    {
+      "guid": "47b9ee5f-9a93-4c4c-a4fc-2ad5a306c8c0",
+      "name": "Nightgaunt",
+      "type": "Creature",
+      "faction": "Dark Legion",
+      "cost": "2",
+      "artist": "Kathrin Polikeit",
+      "artworkLicensor": "Battle for Wesnoth",
+      "image": "/arcmage/rebirth/cards/47b9ee5f-9a93-4c4c-a4fc-2ad5a306c8c0.webp"
+    },
+    {
+      "guid": "97f9e03b-9666-48d0-a44e-2ad59ae2e578",
+      "name": "Nirvana of the Undead",
+      "type": "City",
+      "faction": "Dark Legion",
+      "cost": "S",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/97f9e03b-9666-48d0-a44e-2ad59ae2e578.webp"
+    },
+    {
+      "guid": "f0b2ad78-ea1e-4de9-b8d6-1594925bec5d",
+      "name": "Out of Nowhere",
+      "type": "Magic",
+      "faction": "Dark Legion",
+      "cost": "2",
+      "artist": "Emilien Rotival",
+      "artworkLicensor": "Battle for Wesnoth",
+      "image": "/arcmage/rebirth/cards/f0b2ad78-ea1e-4de9-b8d6-1594925bec5d.webp"
+    },
+    {
+      "guid": "bcef3fd3-8f71-4327-bc5a-1c790c57859a",
+      "name": "Raise the Undead",
+      "type": "Enchantment",
+      "faction": "Dark Legion",
+      "cost": "2",
+      "artist": "doofus-01",
+      "artworkLicensor": "Battle for Wesnoth",
+      "image": "/arcmage/rebirth/cards/bcef3fd3-8f71-4327-bc5a-1c790c57859a.webp"
+    },
+    {
+      "guid": "16831947-80ee-4cb4-9953-99749dbd14d1",
+      "name": "Rotten Deal",
+      "type": "Magic",
+      "faction": "Dark Legion",
+      "cost": "3",
+      "artist": "doofus-01",
+      "artworkLicensor": "Battle for Wesnoth",
+      "image": "/arcmage/rebirth/cards/16831947-80ee-4cb4-9953-99749dbd14d1.webp"
+    },
+    {
+      "guid": "d0ba6168-a245-4aa0-a437-923517a19314",
+      "name": "Shadow in the Dark",
+      "type": "Creature",
+      "faction": "Dark Legion",
+      "cost": "3",
+      "artist": "Kathrin Polikeit",
+      "artworkLicensor": "Battle for Wesnoth",
+      "image": "/arcmage/rebirth/cards/d0ba6168-a245-4aa0-a437-923517a19314.webp"
+    },
+    {
+      "guid": "f5afb7a9-2c04-4ad4-9db7-3cfeb82b5f4b",
+      "name": "Shadow's Twilight",
+      "type": "City",
+      "faction": "Dark Legion",
+      "cost": "S",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "Santharia Dream",
+      "image": "/arcmage/rebirth/cards/f5afb7a9-2c04-4ad4-9db7-3cfeb82b5f4b.webp"
+    },
+    {
+      "guid": "bbb39454-959f-4d77-b141-fd5ee3cd6b4d",
+      "name": "Shatis",
+      "type": "Creature",
+      "faction": "Dark Legion",
+      "cost": "3",
+      "artist": "Kathrin Polikeit",
+      "artworkLicensor": "Battle for Wesnoth",
+      "image": "/arcmage/rebirth/cards/bbb39454-959f-4d77-b141-fd5ee3cd6b4d.webp"
+    },
+    {
+      "guid": "4ff310fc-d1b8-4243-91e9-369989bedf1f",
+      "name": "Undead Archer",
+      "type": "Creature",
+      "faction": "Dark Legion",
+      "cost": "3",
+      "artist": "Chris Wilson",
+      "artworkLicensor": "Battle for Wesnoth",
+      "image": "/arcmage/rebirth/cards/4ff310fc-d1b8-4243-91e9-369989bedf1f.webp"
+    },
+    {
+      "guid": "b3863d07-9ee0-43e7-b60a-f4d39d0c8fe2",
+      "name": "Wight",
+      "type": "Creature",
+      "faction": "Dark Legion",
+      "cost": "2",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/b3863d07-9ee0-43e7-b60a-f4d39d0c8fe2.webp"
+    },
+    {
+      "guid": "5b61defd-a35e-4701-9c2a-ff1d59017f23",
+      "name": "Botanist",
+      "type": "Creature",
+      "faction": "Gaian",
+      "cost": "2",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/5b61defd-a35e-4701-9c2a-ff1d59017f23.webp"
+    },
+    {
+      "guid": "5df799f2-8796-4d0d-abe0-dced3ece38d1",
+      "name": "Call to Aid",
+      "type": "Event",
+      "faction": "Gaian",
+      "cost": "3",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/5df799f2-8796-4d0d-abe0-dced3ece38d1.webp"
+    },
+    {
+      "guid": "13a6535d-7930-4fb0-88cb-3323cdc8f6d4",
+      "name": "Crop Token",
+      "type": "Creature",
+      "faction": "Gaian",
+      "cost": "",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/13a6535d-7930-4fb0-88cb-3323cdc8f6d4.webp"
+    },
+    {
+      "guid": "7a3a0a3b-b970-453c-a39c-add2bf2e5afc",
+      "name": "Early Spring",
+      "type": "Event",
+      "faction": "Gaian",
+      "cost": "4",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/7a3a0a3b-b970-453c-a39c-add2bf2e5afc.webp"
+    },
+    {
+      "guid": "c0661241-00cc-4d76-b757-5c1ab0452da1",
+      "name": "Elvish Ambush",
+      "type": "Creature",
+      "faction": "Gaian",
+      "cost": "3",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/c0661241-00cc-4d76-b757-5c1ab0452da1.webp"
+    },
+    {
+      "guid": "15dc642a-bbd5-4ef9-8d0e-2c6e45d20c2f",
+      "name": "Elvish Archer",
+      "type": "Creature",
+      "faction": "Gaian",
+      "cost": "3",
+      "artist": "Kathrin Polikeit",
+      "artworkLicensor": "Battle for Wesnoth",
+      "image": "/arcmage/rebirth/cards/15dc642a-bbd5-4ef9-8d0e-2c6e45d20c2f.webp"
+    },
+    {
+      "guid": "ac88c304-fa49-4ba8-987d-04dbf15534de",
+      "name": "Falconer",
+      "type": "Creature",
+      "faction": "Gaian",
+      "cost": "3",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/ac88c304-fa49-4ba8-987d-04dbf15534de.webp"
+    },
+    {
+      "guid": "bc91e84b-f231-4997-8e94-7f9fcdddc982",
+      "name": "Farmland",
+      "type": "City",
+      "faction": "Gaian",
+      "cost": "S",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/bc91e84b-f231-4997-8e94-7f9fcdddc982.webp"
+    },
+    {
+      "guid": "8ac5e9f1-c25c-450b-8642-8d20747e43ff",
+      "name": "Grassroots",
+      "type": "Enchantment",
+      "faction": "Gaian",
+      "cost": "X",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/8ac5e9f1-c25c-450b-8642-8d20747e43ff.webp"
+    },
+    {
+      "guid": "629a5adf-f9d5-44ff-b389-f640f529467a",
+      "name": "Kolibri",
+      "type": "Creature",
+      "faction": "Gaian",
+      "cost": "1",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/629a5adf-f9d5-44ff-b389-f640f529467a.webp"
+    },
+    {
+      "guid": "770cdf48-97df-41d8-9d8f-5b6607e99feb",
+      "name": "Majestic Griffin",
+      "type": "Creature",
+      "faction": "Gaian",
+      "cost": "5",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/770cdf48-97df-41d8-9d8f-5b6607e99feb.webp"
+    },
+    {
+      "guid": "b9516f1a-6efa-4e8d-977e-0c5220d01f93",
+      "name": "Nature's Outrage",
+      "type": "Magic",
+      "faction": "Gaian",
+      "cost": "6",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/b9516f1a-6efa-4e8d-977e-0c5220d01f93.webp"
+    },
+    {
+      "guid": "e2985a28-ee20-4b9e-908c-dddcd2aa1493",
+      "name": "Nightingale",
+      "type": "Creature",
+      "faction": "Gaian",
+      "cost": "3",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/e2985a28-ee20-4b9e-908c-dddcd2aa1493.webp"
+    },
+    {
+      "guid": "44836060-f6c4-432e-8122-8442ac9ab21a",
+      "name": "Nourished Flower",
+      "type": "Creature",
+      "faction": "Gaian",
+      "cost": "2",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/44836060-f6c4-432e-8122-8442ac9ab21a.webp"
+    },
+    {
+      "guid": "265c1f00-d267-4d0a-a041-eb96921967ba",
+      "name": "Poison Ivy",
+      "type": "Creature",
+      "faction": "Gaian",
+      "cost": "2",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/265c1f00-d267-4d0a-a041-eb96921967ba.webp"
+    },
+    {
+      "guid": "a7229396-f9ec-4516-b83d-73e3291b5527",
+      "name": "Sanctuary",
+      "type": "City",
+      "faction": "Gaian",
+      "cost": "S",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/a7229396-f9ec-4516-b83d-73e3291b5527.webp"
+    },
+    {
+      "guid": "09b06049-cf4f-48bd-b48c-dae06ff26bea",
+      "name": "Sequoia Saplings",
+      "type": "Creature",
+      "faction": "Gaian",
+      "cost": "3",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/09b06049-cf4f-48bd-b48c-dae06ff26bea.webp"
+    },
+    {
+      "guid": "a4257262-0eb9-482a-aef3-bd930760378a",
+      "name": "Spirit Tree",
+      "type": "City",
+      "faction": "Gaian",
+      "cost": "S",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/a4257262-0eb9-482a-aef3-bd930760378a.webp"
+    },
+    {
+      "guid": "6d4a048c-627d-4b78-b0f5-5ec64e087cb3",
+      "name": "Archivist",
+      "type": "Creature",
+      "faction": "House of Nobles",
+      "cost": "3",
+      "artist": "Kathrin Polikeit",
+      "artworkLicensor": "Battle for Wesnoth",
+      "image": "/arcmage/rebirth/cards/6d4a048c-627d-4b78-b0f5-5ec64e087cb3.webp"
+    },
+    {
+      "guid": "c979c3ad-ee9f-4edf-a404-83ea994b38f2",
+      "name": "Benevolent Baron",
+      "type": "Creature",
+      "faction": "House of Nobles",
+      "cost": "3",
+      "artist": "Emilien Rotival",
+      "artworkLicensor": "Battle for Wesnoth",
+      "image": "/arcmage/rebirth/cards/c979c3ad-ee9f-4edf-a404-83ea994b38f2.webp"
+    },
+    {
+      "guid": "fa2faaec-1f46-4f6f-bf7e-235731202216",
+      "name": "Binding Contract",
+      "type": "Enchantment",
+      "faction": "House of Nobles",
+      "cost": "2",
+      "artist": "Emilien Rotival",
+      "artworkLicensor": "Battle for Wesnoth",
+      "image": "/arcmage/rebirth/cards/fa2faaec-1f46-4f6f-bf7e-235731202216.webp"
+    },
+    {
+      "guid": "0b4587bb-1d6d-45ce-8a72-ed38f7e21b14",
+      "name": "Blindfolded",
+      "type": "Enchantment",
+      "faction": "House of Nobles",
+      "cost": "3",
+      "artist": "Kathrin Polikeit",
+      "artworkLicensor": "Battle for Wesnoth",
+      "image": "/arcmage/rebirth/cards/0b4587bb-1d6d-45ce-8a72-ed38f7e21b14.webp"
+    },
+    {
+      "guid": "34cc33ce-106c-4faa-bbbc-8a8b72c59717",
+      "name": "Carpe Diem",
+      "type": "Event",
+      "faction": "House of Nobles",
+      "cost": "2",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/34cc33ce-106c-4faa-bbbc-8a8b72c59717.webp"
+    },
+    {
+      "guid": "48ad92f2-a02c-4133-a6e2-3f669b1f68e4",
+      "name": "Entangled",
+      "type": "Enchantment",
+      "faction": "House of Nobles",
+      "cost": "3",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/48ad92f2-a02c-4133-a6e2-3f669b1f68e4.webp"
+    },
+    {
+      "guid": "2caf29b1-9d0d-4768-9996-c0d971c57d32",
+      "name": "Erode",
+      "type": "Event",
+      "faction": "House of Nobles",
+      "cost": "2",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/2caf29b1-9d0d-4768-9996-c0d971c57d32.webp"
+    },
+    {
+      "guid": "b20145cd-1779-49c8-9f6c-cf96681f5deb",
+      "name": "Esteemed Councilor",
+      "type": "Creature",
+      "faction": "House of Nobles",
+      "cost": "3",
+      "artist": "Kathrin Polikeit",
+      "artworkLicensor": "Battle for Wesnoth",
+      "image": "/arcmage/rebirth/cards/b20145cd-1779-49c8-9f6c-cf96681f5deb.webp"
+    },
+    {
+      "guid": "248c52c1-b9e4-4b89-9b86-79c98142fe81",
+      "name": "Esteemed Duelist",
+      "type": "Creature",
+      "faction": "House of Nobles",
+      "cost": "2",
+      "artist": "Emilien Rotival",
+      "artworkLicensor": "Battle for Wesnoth",
+      "image": "/arcmage/rebirth/cards/248c52c1-b9e4-4b89-9b86-79c98142fe81.webp"
+    },
+    {
+      "guid": "14d7a456-b711-4987-9419-e77f7bd0b9ae",
+      "name": "Merchant Ship",
+      "type": "Creature",
+      "faction": "House of Nobles",
+      "cost": "3",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/14d7a456-b711-4987-9419-e77f7bd0b9ae.webp"
+    },
+    {
+      "guid": "41a93a33-6b0a-4831-b611-86b22cbbfbe7",
+      "name": "Prince of Thieves",
+      "type": "Creature",
+      "faction": "House of Nobles",
+      "cost": "3",
+      "artist": "Kathrin Polikeit",
+      "artworkLicensor": "Battle for Wesnoth",
+      "image": "/arcmage/rebirth/cards/41a93a33-6b0a-4831-b611-86b22cbbfbe7.webp"
+    },
+    {
+      "guid": "b98b7d62-733e-480a-9da3-93fadb43ccfb",
+      "name": "Qualaris",
+      "type": "City",
+      "faction": "House of Nobles",
+      "cost": "S",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "Santharia Dream",
+      "image": "/arcmage/rebirth/cards/b98b7d62-733e-480a-9da3-93fadb43ccfb.webp"
+    },
+    {
+      "guid": "4d03c39b-ed26-4750-b476-ebaa613a65d6",
+      "name": "Royal Guard",
+      "type": "Creature",
+      "faction": "House of Nobles",
+      "cost": "4",
+      "artist": "Emilien Rotival",
+      "artworkLicensor": "Battle for Wesnoth",
+      "image": "/arcmage/rebirth/cards/4d03c39b-ed26-4750-b476-ebaa613a65d6.webp"
+    },
+    {
+      "guid": "ab77e0ae-8ec7-48c0-9485-69842a740b35",
+      "name": "Siphon",
+      "type": "City",
+      "faction": "House of Nobles",
+      "cost": "S",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/ab77e0ae-8ec7-48c0-9485-69842a740b35.webp"
+    },
+    {
+      "guid": "9f99fd52-76f5-4569-8ecc-b694ec5da1b0",
+      "name": "Touch of Genius",
+      "type": "Event",
+      "faction": "House of Nobles",
+      "cost": "3",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/9f99fd52-76f5-4569-8ecc-b694ec5da1b0.webp"
+    },
+    {
+      "guid": "4f39453a-08f4-4358-abb8-0d737e156bb9",
+      "name": "Two Bridges",
+      "type": "City",
+      "faction": "House of Nobles",
+      "cost": "S",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "Santharia Dream",
+      "image": "/arcmage/rebirth/cards/4f39453a-08f4-4358-abb8-0d737e156bb9.webp"
+    },
+    {
+      "guid": "60da8f2f-5368-4c2c-8e4a-a27b241a2cc7",
+      "name": "Whirlwind",
+      "type": "Event",
+      "faction": "House of Nobles",
+      "cost": "2",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/60da8f2f-5368-4c2c-8e4a-a27b241a2cc7.webp"
+    },
+    {
+      "guid": "5e18ba56-5602-4f12-b4d1-d7d4c5bbf8e5",
+      "name": "Besieged City",
+      "type": "Enchantment",
+      "faction": "Red Banner",
+      "cost": "5",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/5e18ba56-5602-4f12-b4d1-d7d4c5bbf8e5.webp"
+    },
+    {
+      "guid": "58978102-0042-487f-873f-97fab27eef67",
+      "name": "Big Brother",
+      "type": "Creature",
+      "faction": "Red Banner",
+      "cost": "2",
+      "artist": "Kathrin Polikeit & Bora Orcal",
+      "artworkLicensor": "Battle for Wesnoth",
+      "image": "/arcmage/rebirth/cards/58978102-0042-487f-873f-97fab27eef67.webp"
+    },
+    {
+      "guid": "b228e22f-69c3-40e8-992b-45a4b08a40f3",
+      "name": "Big Orc Token",
+      "type": "Creature",
+      "faction": "Red Banner",
+      "cost": null,
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/b228e22f-69c3-40e8-992b-45a4b08a40f3.webp"
+    },
+    {
+      "guid": "df11b672-2449-4ca1-b4f1-a8e714429ac0",
+      "name": "Cutpurse Imp",
+      "type": "Creature",
+      "faction": "Red Banner",
+      "cost": "3",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/df11b672-2449-4ca1-b4f1-a8e714429ac0.webp"
+    },
+    {
+      "guid": "b324e835-8352-4d0b-8426-366c358d9351",
+      "name": "Deadly Shock",
+      "type": "Event",
+      "faction": "Red Banner",
+      "cost": "2",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/b324e835-8352-4d0b-8426-366c358d9351.webp"
+    },
+    {
+      "guid": "d75d0ba9-0fd9-4eef-a1b2-288a0942a853",
+      "name": "Imp Union Leader",
+      "type": "Creature",
+      "faction": "Red Banner",
+      "cost": "4",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/d75d0ba9-0fd9-4eef-a1b2-288a0942a853.webp"
+    },
+    {
+      "guid": "dba608c3-f47d-445b-a81c-325578baec3f",
+      "name": "Little Brother",
+      "type": "Creature",
+      "faction": "Red Banner",
+      "cost": "1",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/dba608c3-f47d-445b-a81c-325578baec3f.webp"
+    },
+    {
+      "guid": "c76714eb-4caf-41f4-8607-19cfcd8a1a41",
+      "name": "Little Orc Token",
+      "type": "Creature",
+      "faction": "Red Banner",
+      "cost": null,
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/c76714eb-4caf-41f4-8607-19cfcd8a1a41.webp"
+    },
+    {
+      "guid": "861fe424-64d7-4b3e-a471-17778ba06712",
+      "name": "Misled Orc",
+      "type": "Creature",
+      "faction": "Red Banner",
+      "cost": "1",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/861fe424-64d7-4b3e-a471-17778ba06712.webp"
+    },
+    {
+      "guid": "43ea643f-54a6-4663-84b4-418fa3785966",
+      "name": "Orc Drummer",
+      "type": "Creature",
+      "faction": "Red Banner",
+      "cost": "3",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/43ea643f-54a6-4663-84b4-418fa3785966.webp"
+    },
+    {
+      "guid": "16092dd0-3ea2-4c91-ab4b-b886dc45be07",
+      "name": "Orc Recruiter",
+      "type": "Creature",
+      "faction": "Red Banner",
+      "cost": "4",
+      "artist": "Emilien Rotival",
+      "artworkLicensor": "Battle for Wesnoth",
+      "image": "/arcmage/rebirth/cards/16092dd0-3ea2-4c91-ab4b-b886dc45be07.webp"
+    },
+    {
+      "guid": "f2da7886-560b-4303-b857-adad1a67e75b",
+      "name": "Orc Rouser",
+      "type": "Creature",
+      "faction": "Red Banner",
+      "cost": "2",
+      "artist": "Bora Orcal",
+      "artworkLicensor": "Battle for Wesnoth",
+      "image": "/arcmage/rebirth/cards/f2da7886-560b-4303-b857-adad1a67e75b.webp"
+    },
+    {
+      "guid": "d57012b2-2c8f-40df-b6ec-32cb9975752d",
+      "name": "Orc Scout",
+      "type": "Creature",
+      "faction": "Red Banner",
+      "cost": "2",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/d57012b2-2c8f-40df-b6ec-32cb9975752d.webp"
+    },
+    {
+      "guid": "835ed76b-f3b1-4818-8032-7fe79c349e0a",
+      "name": "Orc Thug",
+      "type": "Creature",
+      "faction": "Red Banner",
+      "cost": "1",
+      "artist": "Emilien Rotival",
+      "artworkLicensor": "Battle for Wesnoth",
+      "image": "/arcmage/rebirth/cards/835ed76b-f3b1-4818-8032-7fe79c349e0a.webp"
+    },
+    {
+      "guid": "c08e4663-0a52-4a54-b702-4ecc19001980",
+      "name": "Orc Warleader",
+      "type": "Creature",
+      "faction": "Red Banner",
+      "cost": "5",
+      "artist": "Emilien Rotival",
+      "artworkLicensor": "Battle for Wesnoth",
+      "image": "/arcmage/rebirth/cards/c08e4663-0a52-4a54-b702-4ecc19001980.webp"
+    },
+    {
+      "guid": "2493d016-fc78-473c-9f4f-e5f9589adf0d",
+      "name": "Outmaneuvered",
+      "type": "Event",
+      "faction": "Red Banner",
+      "cost": "4",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/2493d016-fc78-473c-9f4f-e5f9589adf0d.webp"
+    },
+    {
+      "guid": "b1f86aab-92fc-4d8b-80cd-36e559d2f5ef",
+      "name": "Second Sons' Army Camp",
+      "type": "City",
+      "faction": "Red Banner",
+      "cost": "S",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/b1f86aab-92fc-4d8b-80cd-36e559d2f5ef.webp"
+    },
+    {
+      "guid": "9a8d0186-c805-4f3d-a62d-75140ad2fb04",
+      "name": "Tunnel Network",
+      "type": "City",
+      "faction": "Red Banner",
+      "cost": "S",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/9a8d0186-c805-4f3d-a62d-75140ad2fb04.webp"
+    },
+    {
+      "guid": "3d9c7b22-58ab-48f2-9d57-468261683a93",
+      "name": "Warren",
+      "type": "City",
+      "faction": "Red Banner",
+      "cost": "S",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/3d9c7b22-58ab-48f2-9d57-468261683a93.webp"
+    },
+    {
+      "guid": "44d030ea-99d1-41a0-92e8-b62caab5a05c",
+      "name": "Wild Warg",
+      "type": "Creature",
+      "faction": "Red Banner",
+      "cost": "4",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/44d030ea-99d1-41a0-92e8-b62caab5a05c.webp"
+    },
+    {
+      "guid": "e077af2e-97cd-491f-8e41-9f16b324f7bc",
+      "name": "Witchdoctor",
+      "type": "Creature",
+      "faction": "Red Banner",
+      "cost": "3",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/e077af2e-97cd-491f-8e41-9f16b324f7bc.webp"
+    },
+    {
+      "guid": "af6b2fe4-a59f-4519-9945-9c0b965f806b",
+      "name": "Wolf Rider",
+      "type": "Creature",
+      "faction": "Red Banner",
+      "cost": "2",
+      "artist": "Kathrin Polikeit",
+      "artworkLicensor": "Battle for Wesnoth",
+      "image": "/arcmage/rebirth/cards/af6b2fe4-a59f-4519-9945-9c0b965f806b.webp"
+    },
+    {
+      "guid": "9c9c5c4f-3b05-4789-9860-d24daf32fca0",
+      "name": "Armory",
+      "type": "City",
+      "faction": "The Empire",
+      "cost": "S",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/9c9c5c4f-3b05-4789-9860-d24daf32fca0.webp"
+    },
+    {
+      "guid": "236d527c-c22d-460b-9ec8-684e6b8da952",
+      "name": "Assemble the Army",
+      "type": "Magic",
+      "faction": "The Empire",
+      "cost": "4",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/236d527c-c22d-460b-9ec8-684e6b8da952.webp"
+    },
+    {
+      "guid": "b5cb9237-8084-4d44-b31c-9d001928de51",
+      "name": "Barracks",
+      "type": "City",
+      "faction": "The Empire",
+      "cost": "S",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/b5cb9237-8084-4d44-b31c-9d001928de51.webp"
+    },
+    {
+      "guid": "05e24047-1ed1-40d7-9c3b-a5769422cdd8",
+      "name": "Battering Ram",
+      "type": "Event",
+      "faction": "The Empire",
+      "cost": "3",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/05e24047-1ed1-40d7-9c3b-a5769422cdd8.webp"
+    },
+    {
+      "guid": "d7956279-7d26-47bc-afc7-3a87af1af724",
+      "name": "Bearer",
+      "type": "Creature",
+      "faction": "The Empire",
+      "cost": "1",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/d7956279-7d26-47bc-afc7-3a87af1af724.webp"
+    },
+    {
+      "guid": "195de97f-43d6-4b55-961f-b8807a26c670",
+      "name": "Borg's Keep",
+      "type": "City",
+      "faction": "The Empire",
+      "cost": "S",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/195de97f-43d6-4b55-961f-b8807a26c670.webp"
+    },
+    {
+      "guid": "c816fa46-fd19-4351-bcec-f9c536fdb33b",
+      "name": "Conscript",
+      "type": "Creature",
+      "faction": "The Empire",
+      "cost": "2",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/c816fa46-fd19-4351-bcec-f9c536fdb33b.webp"
+    },
+    {
+      "guid": "fdc5e072-f3bb-4156-992f-16d322651fd9",
+      "name": "Dimensional Pocket",
+      "type": "Magic",
+      "faction": "The Empire",
+      "cost": "3",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/fdc5e072-f3bb-4156-992f-16d322651fd9.webp"
+    },
+    {
+      "guid": "b9951f4e-1c63-4a03-b7b2-787e904effaa",
+      "name": "Footsoldier",
+      "type": "Creature",
+      "faction": "The Empire",
+      "cost": "1",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/b9951f4e-1c63-4a03-b7b2-787e904effaa.webp"
+    },
+    {
+      "guid": "c4ef9b38-e319-42fd-88e4-4315fb474e3b",
+      "name": "Mentor",
+      "type": "Creature",
+      "faction": "The Empire",
+      "cost": "3",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/c4ef9b38-e319-42fd-88e4-4315fb474e3b.webp"
+    },
+    {
+      "guid": "876ad6e3-d234-40fa-b97d-42476ffdcb26",
+      "name": "Mercenary",
+      "type": "Creature",
+      "faction": "The Empire",
+      "cost": "2",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/876ad6e3-d234-40fa-b97d-42476ffdcb26.webp"
+    },
+    {
+      "guid": "bb5ff7d0-0e35-42a0-ac8d-1f6e0b9d7d4b",
+      "name": "Mounted Eagle",
+      "type": "Creature",
+      "faction": "The Empire",
+      "cost": "4",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/bb5ff7d0-0e35-42a0-ac8d-1f6e0b9d7d4b.webp"
+    },
+    {
+      "guid": "95ffdd8b-4eb4-4e58-b92a-65c1b979cab9",
+      "name": "Revenge",
+      "type": "Magic",
+      "faction": "The Empire",
+      "cost": "2",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/95ffdd8b-4eb4-4e58-b92a-65c1b979cab9.webp"
+    },
+    {
+      "guid": "166cc883-af72-42b4-b74c-a28ecb0a4bad",
+      "name": "Seat of the Throne",
+      "type": "Enchantment",
+      "faction": "The Empire",
+      "cost": "5",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/166cc883-af72-42b4-b74c-a28ecb0a4bad.webp"
+    },
+    {
+      "guid": "defca6a3-a304-482c-ba32-b62a703c76e9",
+      "name": "Spearman",
+      "type": "Creature",
+      "faction": "The Empire",
+      "cost": "2",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/defca6a3-a304-482c-ba32-b62a703c76e9.webp"
+    },
+    {
+      "guid": "ae365dad-637e-42d0-b547-24e496deebae",
+      "name": "Squad Leader",
+      "type": "Creature",
+      "faction": "The Empire",
+      "cost": "5",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/ae365dad-637e-42d0-b547-24e496deebae.webp"
+    },
+    {
+      "guid": "37cbf8bd-0bbb-4d04-891d-caf53943468e",
+      "name": "Trebuchet",
+      "type": "Creature",
+      "faction": "The Empire",
+      "cost": "3",
+      "artist": "Santiago Iborra",
+      "artworkLicensor": "wtactics.org",
+      "image": "/arcmage/rebirth/cards/37cbf8bd-0bbb-4d04-891d-caf53943468e.webp"
+    }
+  ]
+}

@@ -11,33 +11,40 @@ export function uid(prefix = 'id') {
   return `${prefix}_${Math.random().toString(16).slice(2)}_${Date.now().toString(16)}`
 }
 
+import rebirth from './data/rebirth.json'
+
 export function sampleDecks() {
-  const minion = (name, cost, atk, hp, text = '') => ({ type: 'minion', name, cost, atk, hp, text })
+  const minion = (name, cost, atk, hp, text = '', image = null) => ({ type: 'minion', name, cost, atk, hp, text, image })
+
+  // Build sample decks using real Rebirth card images (local copies).
+  // We keep the toy stats for now; this is about using the official assets cleanly.
+  const byName = new Map((rebirth.cards || []).map((c) => [c.name, c]))
+  const img = (name) => (byName.get(name)?.image || null)
 
   const deckA = [
-    minion('Goblin Intern', 1, 1, 1, 'Cheap and cheerful.'),
-    minion('Street Rat', 1, 1, 2, 'Harder to remove than it looks.'),
-    minion('Arc Spark', 2, 2, 1, 'Glass cannon.'),
-    minion('Book Thief', 2, 2, 2, 'Steals tempo, not books.'),
-    minion('Shielded Duck', 3, 2, 4, 'Quack. (It tanks.)'),
-    minion('Grumpy Golem', 3, 3, 3, 'Midrange staple.'),
-    minion('Clockwork Hound', 4, 4, 3, 'Bites once, bites hard.'),
-    minion('Arc Adept', 4, 3, 5, 'Value body.'),
-    minion('Ogre Accountant', 5, 5, 5, 'Counts damage. Incorrectly.'),
-    minion('Big Bad Banana', 6, 7, 6, 'Too much potassium.'),
+    minion('Goblin Intern', 1, 1, 1, 'Cheap and cheerful.', img('Goblin Intern')),
+    minion('Street Rat', 1, 1, 2, 'Harder to remove than it looks.', img('Street Rat')),
+    minion('Arc Spark', 2, 2, 1, 'Glass cannon.', img('Arc Spark')),
+    minion('Book Thief', 2, 2, 2, 'Steals tempo, not books.', img('Book Thief')),
+    minion('Shielded Duck', 3, 2, 4, 'Quack. (It tanks.)', img('Shielded Duck')),
+    minion('Grumpy Golem', 3, 3, 3, 'Midrange staple.', img('Grumpy Golem')),
+    minion('Clockwork Hound', 4, 4, 3, 'Bites once, bites hard.', img('Clockwork Hound')),
+    minion('Arc Adept', 4, 3, 5, 'Value body.', img('Arc Adept')),
+    minion('Ogre Accountant', 5, 5, 5, 'Counts damage. Incorrectly.', img('Ogre Accountant')),
+    minion('Big Bad Banana', 6, 7, 6, 'Too much potassium.', img('Big Bad Banana')),
   ]
 
   const deckB = [
-    minion('Skeleton', 1, 1, 1, 'Spooky.'),
-    minion('Candle Wisp', 1, 2, 1, 'Hot take.'),
-    minion('Frog Knight', 2, 2, 2, 'Ribbit & rip.'),
-    minion('Library Ghoul', 2, 1, 3, 'Lives in comments.'),
-    minion('Stone Turtle', 3, 1, 6, 'Wins by not dying.'),
-    minion('Wolf', 3, 4, 2, 'Trades up.'),
-    minion('Mirror Soldier', 4, 4, 4, 'Fair statline.'),
-    minion('Spectral Bear', 4, 5, 3, 'Pushes damage.'),
-    minion('Boulder Titan', 5, 6, 5, 'Ends arguments.'),
-    minion('Ancient Dragon', 7, 8, 8, 'Game ender.'),
+    minion('Skeleton', 1, 1, 1, 'Spooky.', img('Skeleton')),
+    minion('Candle Wisp', 1, 2, 1, 'Hot take.', img('Candle Wisp')),
+    minion('Frog Knight', 2, 2, 2, 'Ribbit & rip.', img('Frog Knight')),
+    minion('Library Ghoul', 2, 1, 3, 'Lives in comments.', img('Library Ghoul')),
+    minion('Stone Turtle', 3, 1, 6, 'Wins by not dying.', img('Stone Turtle')),
+    minion('Wolf', 3, 4, 2, 'Trades up.', img('Wolf')),
+    minion('Mirror Soldier', 4, 4, 4, 'Fair statline.', img('Mirror Soldier')),
+    minion('Spectral Bear', 4, 5, 3, 'Pushes damage.', img('Spectral Bear')),
+    minion('Boulder Titan', 5, 6, 5, 'Ends arguments.', img('Boulder Titan')),
+    minion('Ancient Dragon', 7, 8, 8, 'Game ender.', img('Ancient Dragon')),
   ]
 
   // Make them larger by repeating.

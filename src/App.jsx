@@ -25,6 +25,16 @@ function Card({ card, onClick, disabled, selected, danger, actionLabel }) {
         <span>Cost {card.cost}</span>
         <span>{card.atk}/{card.hp}</span>
       </div>
+
+      {card.image ? (
+        <img
+          src={card.image}
+          alt={card.name}
+          style={{ width: '100%', borderRadius: 10, marginTop: 8, border: '1px solid #394265' }}
+          loading="lazy"
+        />
+      ) : null}
+
       <div className="cardText">{card.text || ''}</div>
       {onClick && (
         <div className="cardBtnRow">
