@@ -19,7 +19,7 @@
       "ruleText": "Mark target creature. Move the marked card to a city or army controlled by its owner.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/6e32f1b9-6721-42c1-b8cb-9d2314e37556.webp"
+      "image": "arcmage/rebirth/cards/6e32f1b9-6721-42c1-b8cb-9d2314e37556.webp"
     },
     {
       "guid": "ccc274e8-5c75-444e-ab9c-49356c5d906a",
@@ -34,7 +34,7 @@
       "ruleText": "Sacrifice all Dark Legion creatures in your army. For each sacrificed creature, target player discards a card or sacrifices a resource card.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/ccc274e8-5c75-444e-ab9c-49356c5d906a.webp"
+      "image": "arcmage/rebirth/cards/ccc274e8-5c75-444e-ab9c-49356c5d906a.webp"
     },
     {
       "guid": "23d68aac-807f-4e8e-baf8-695ee79fe600",
@@ -49,7 +49,7 @@
       "ruleText": "M, Each city you control loses 1 defense point. Move target creature without marking it.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/23d68aac-807f-4e8e-baf8-695ee79fe600.webp"
+      "image": "arcmage/rebirth/cards/23d68aac-807f-4e8e-baf8-695ee79fe600.webp"
     },
     {
       "guid": "4e87f673-2ecf-4aa2-b384-1cfb3fa0f30d",
@@ -64,7 +64,7 @@
       "ruleText": "Target creature cannot attack Dark Legion cities, nor can it defend against Dark Legion creatures.",
       "artist": "Kathrin Polikeit",
       "artworkLicensor": "Battle for Wesnoth",
-      "image": "/arcmage/rebirth/cards/4e87f673-2ecf-4aa2-b384-1cfb3fa0f30d.webp"
+      "image": "arcmage/rebirth/cards/4e87f673-2ecf-4aa2-b384-1cfb3fa0f30d.webp"
     },
     {
       "guid": "1c8e33b1-7a8b-43e8-b690-f99970e9f1a0",
@@ -79,7 +79,7 @@
       "ruleText": "All creatures have deadly until end of turn and all Undead creatures are immune to deadly until end of turn.",
       "artist": "Emilien Rotival",
       "artworkLicensor": "Battle for Wesnoth",
-      "image": "/arcmage/rebirth/cards/1c8e33b1-7a8b-43e8-b690-f99970e9f1a0.webp"
+      "image": "arcmage/rebirth/cards/1c8e33b1-7a8b-43e8-b690-f99970e9f1a0.webp"
     },
     {
       "guid": "fe68f069-6e7f-4d66-9db9-c76a4338b53d",
@@ -94,7 +94,7 @@
       "ruleText": "Flying - Creatures without flying cannot stop me. Lose 1 defense point on a city: either target creature gets -1/-1 and I get +1/+1, or vice versa.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/fe68f069-6e7f-4d66-9db9-c76a4338b53d.webp"
+      "image": "arcmage/rebirth/cards/fe68f069-6e7f-4d66-9db9-c76a4338b53d.webp"
     },
     {
       "guid": "e040f4e6-5826-4ff2-aa37-267d204b254d",
@@ -109,7 +109,7 @@
       "ruleText": "I get +1/+1 for each other Imp in play.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/e040f4e6-5826-4ff2-aa37-267d204b254d.webp"
+      "image": "arcmage/rebirth/cards/e040f4e6-5826-4ff2-aa37-267d204b254d.webp"
     },
     {
       "guid": "3fbd35fd-836a-4d15-8736-7ae35fed0f1b",
@@ -124,7 +124,7 @@
       "ruleText": "Sudden - I can be played directly into your army.",
       "artist": "Kathrin Polikeit",
       "artworkLicensor": "Battle for Wesnoth",
-      "image": "/arcmage/rebirth/cards/3fbd35fd-836a-4d15-8736-7ae35fed0f1b.webp"
+      "image": "arcmage/rebirth/cards/3fbd35fd-836a-4d15-8736-7ae35fed0f1b.webp"
     },
     {
       "guid": "345c864e-0398-48b7-991f-1bc1e6b9c279",
@@ -139,7 +139,7 @@
       "ruleText": "When I die, target player discards a card or sacrifices a resource card.",
       "artist": "zookeeper",
       "artworkLicensor": "Battle for Wesnoth",
-      "image": "/arcmage/rebirth/cards/345c864e-0398-48b7-991f-1bc1e6b9c279.webp"
+      "image": "arcmage/rebirth/cards/345c864e-0398-48b7-991f-1bc1e6b9c279.webp"
     },
     {
       "guid": "d82feac4-f3c7-4c0b-ab97-20d983e275a0",
@@ -154,7 +154,7 @@
       "ruleText": "Sacrifice a city you control; destroy all creatures and enchantments.",
       "artist": "Emilien Rotival",
       "artworkLicensor": "Battle for Wesnoth",
-      "image": "/arcmage/rebirth/cards/d82feac4-f3c7-4c0b-ab97-20d983e275a0.webp"
+      "image": "arcmage/rebirth/cards/d82feac4-f3c7-4c0b-ab97-20d983e275a0.webp"
     },
     {
       "guid": "ca459abf-2452-4d92-966c-da73e55b383d",
@@ -169,7 +169,7 @@
       "ruleText": "Level 3: All players discard two cards. Level 5: Draw a card. Level 7: Each time an opponent draws a card, deal 2 damage to one of that opponent's cities.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/ca459abf-2452-4d92-966c-da73e55b383d.webp"
+      "image": "arcmage/rebirth/cards/ca459abf-2452-4d92-966c-da73e55b383d.webp"
     },
     {
       "guid": "47b9ee5f-9a93-4c4c-a4fc-2ad5a306c8c0",
@@ -184,7 +184,7 @@
       "ruleText": "Flying - Only creatures with flying and ranged can defend against me. When I come into play, target player discards a card or sacrifices a resource card.",
       "artist": "Kathrin Polikeit",
       "artworkLicensor": "Battle for Wesnoth",
-      "image": "/arcmage/rebirth/cards/47b9ee5f-9a93-4c4c-a4fc-2ad5a306c8c0.webp"
+      "image": "arcmage/rebirth/cards/47b9ee5f-9a93-4c4c-a4fc-2ad5a306c8c0.webp"
     },
     {
       "guid": "97f9e03b-9666-48d0-a44e-2ad59ae2e578",
@@ -199,7 +199,7 @@
       "ruleText": "Level 3: All Undead creatures become deadly. Level 5: Whenever a non-undead creature you control would be put into a graveyard from play, you may put it in your army instead. That creature gains the type Undead.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/97f9e03b-9666-48d0-a44e-2ad59ae2e578.webp"
+      "image": "arcmage/rebirth/cards/97f9e03b-9666-48d0-a44e-2ad59ae2e578.webp"
     },
     {
       "guid": "f0b2ad78-ea1e-4de9-b8d6-1594925bec5d",
@@ -214,7 +214,7 @@
       "ruleText": "Search your deck for a Dark Legion card and put it in your hand. Shuffle your deck afterwards.",
       "artist": "Emilien Rotival",
       "artworkLicensor": "Battle for Wesnoth",
-      "image": "/arcmage/rebirth/cards/f0b2ad78-ea1e-4de9-b8d6-1594925bec5d.webp"
+      "image": "arcmage/rebirth/cards/f0b2ad78-ea1e-4de9-b8d6-1594925bec5d.webp"
     },
     {
       "guid": "bcef3fd3-8f71-4327-bc5a-1c790c57859a",
@@ -229,7 +229,7 @@
       "ruleText": "Search any graveyard and put target creature in your army. That creature has the \"Undead\" type next to its other types.",
       "artist": "doofus-01",
       "artworkLicensor": "Battle for Wesnoth",
-      "image": "/arcmage/rebirth/cards/bcef3fd3-8f71-4327-bc5a-1c790c57859a.webp"
+      "image": "arcmage/rebirth/cards/bcef3fd3-8f71-4327-bc5a-1c790c57859a.webp"
     },
     {
       "guid": "16831947-80ee-4cb4-9953-99749dbd14d1",
@@ -244,7 +244,7 @@
       "ruleText": "Target player either discards two cards, or sacrifices two resource cards, or discards one card and sacrifices one resource card.",
       "artist": "doofus-01",
       "artworkLicensor": "Battle for Wesnoth",
-      "image": "/arcmage/rebirth/cards/16831947-80ee-4cb4-9953-99749dbd14d1.webp"
+      "image": "arcmage/rebirth/cards/16831947-80ee-4cb4-9953-99749dbd14d1.webp"
     },
     {
       "guid": "d0ba6168-a245-4aa0-a437-923517a19314",
@@ -259,7 +259,7 @@
       "ruleText": "Infiltrate - I can move into opponents' cities. M, put a -1/-1 counter on me: destroy target creature in the same city.",
       "artist": "Kathrin Polikeit",
       "artworkLicensor": "Battle for Wesnoth",
-      "image": "/arcmage/rebirth/cards/d0ba6168-a245-4aa0-a437-923517a19314.webp"
+      "image": "arcmage/rebirth/cards/d0ba6168-a245-4aa0-a437-923517a19314.webp"
     },
     {
       "guid": "f5afb7a9-2c04-4ad4-9db7-3cfeb82b5f4b",
@@ -274,7 +274,7 @@
       "ruleText": "Level 2: When an opponent discards a card, he/she chooses one of his/her cities. That city gets 1 damage. Level 5: Shadow creatures you control are indestructible.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "Santharia Dream",
-      "image": "/arcmage/rebirth/cards/f5afb7a9-2c04-4ad4-9db7-3cfeb82b5f4b.webp"
+      "image": "arcmage/rebirth/cards/f5afb7a9-2c04-4ad4-9db7-3cfeb82b5f4b.webp"
     },
     {
       "guid": "bbb39454-959f-4d77-b141-fd5ee3cd6b4d",
@@ -289,7 +289,7 @@
       "ruleText": "Flying - Only creatures with flying and ranged can defend against me. When I damage a city, that player or that city's owner discards a card or sacrifices a resource card.",
       "artist": "Kathrin Polikeit",
       "artworkLicensor": "Battle for Wesnoth",
-      "image": "/arcmage/rebirth/cards/bbb39454-959f-4d77-b141-fd5ee3cd6b4d.webp"
+      "image": "arcmage/rebirth/cards/bbb39454-959f-4d77-b141-fd5ee3cd6b4d.webp"
     },
     {
       "guid": "4ff310fc-d1b8-4243-91e9-369989bedf1f",
@@ -304,7 +304,7 @@
       "ruleText": "Ranged - I can defend against creatures with flying. M, Deal 1 damage to target creature or city.",
       "artist": "Chris Wilson",
       "artworkLicensor": "Battle for Wesnoth",
-      "image": "/arcmage/rebirth/cards/4ff310fc-d1b8-4243-91e9-369989bedf1f.webp"
+      "image": "arcmage/rebirth/cards/4ff310fc-d1b8-4243-91e9-369989bedf1f.webp"
     },
     {
       "guid": "b3863d07-9ee0-43e7-b60a-f4d39d0c8fe2",
@@ -319,7 +319,7 @@
       "ruleText": "When I'm in the graveyard and there are three cards on top of me, target player discards a card or sacrifices a resource card, then I am put on top of your graveyard.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/b3863d07-9ee0-43e7-b60a-f4d39d0c8fe2.webp"
+      "image": "arcmage/rebirth/cards/b3863d07-9ee0-43e7-b60a-f4d39d0c8fe2.webp"
     },
     {
       "guid": "5b61defd-a35e-4701-9c2a-ff1d59017f23",
@@ -334,7 +334,7 @@
       "ruleText": "Peaceful. M Sacrifice two resource cards: prevent a Tree or Flower from dying. Mark the saved card.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/5b61defd-a35e-4701-9c2a-ff1d59017f23.webp"
+      "image": "arcmage/rebirth/cards/5b61defd-a35e-4701-9c2a-ff1d59017f23.webp"
     },
     {
       "guid": "5df799f2-8796-4d0d-abe0-dced3ece38d1",
@@ -349,7 +349,7 @@
       "ruleText": "Residents of target city you control can help defend another city you control until end of turn.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/5df799f2-8796-4d0d-abe0-dced3ece38d1.webp"
+      "image": "arcmage/rebirth/cards/5df799f2-8796-4d0d-abe0-dced3ece38d1.webp"
     },
     {
       "guid": "13a6535d-7930-4fb0-88cb-3323cdc8f6d4",
@@ -364,7 +364,7 @@
       "ruleText": "M, Sacrifice me to produce 1 Gaian resource.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/13a6535d-7930-4fb0-88cb-3323cdc8f6d4.webp"
+      "image": "arcmage/rebirth/cards/13a6535d-7930-4fb0-88cb-3323cdc8f6d4.webp"
     },
     {
       "guid": "7a3a0a3b-b970-453c-a39c-add2bf2e5afc",
@@ -379,7 +379,7 @@
       "ruleText": "Each Tree or Flower creature gets +2/+2 until end of turn. Each Gaian city gains 2 defense points.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/7a3a0a3b-b970-453c-a39c-add2bf2e5afc.webp"
+      "image": "arcmage/rebirth/cards/7a3a0a3b-b970-453c-a39c-add2bf2e5afc.webp"
     },
     {
       "guid": "c0661241-00cc-4d76-b757-5c1ab0452da1",
@@ -394,7 +394,7 @@
       "ruleText": "Creatures defending against me get -1/-1 until end of turn. M, deal 1 damage to target creature or city.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/c0661241-00cc-4d76-b757-5c1ab0452da1.webp"
+      "image": "arcmage/rebirth/cards/c0661241-00cc-4d76-b757-5c1ab0452da1.webp"
     },
     {
       "guid": "15dc642a-bbd5-4ef9-8d0e-2c6e45d20c2f",
@@ -409,7 +409,7 @@
       "ruleText": "When I come into play my city gains 2 defense points. All elves in play gain ranged. Ranged - I can defend against creatures with flying.",
       "artist": "Kathrin Polikeit",
       "artworkLicensor": "Battle for Wesnoth",
-      "image": "/arcmage/rebirth/cards/15dc642a-bbd5-4ef9-8d0e-2c6e45d20c2f.webp"
+      "image": "arcmage/rebirth/cards/15dc642a-bbd5-4ef9-8d0e-2c6e45d20c2f.webp"
     },
     {
       "guid": "ac88c304-fa49-4ba8-987d-04dbf15534de",
@@ -424,7 +424,7 @@
       "ruleText": "M, Sacrifice two resource cards: prevent a Bird from dying. Mark the saved card. Birds in your hand, deck and graveyard have sudden.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/ac88c304-fa49-4ba8-987d-04dbf15534de.webp"
+      "image": "arcmage/rebirth/cards/ac88c304-fa49-4ba8-987d-04dbf15534de.webp"
     },
     {
       "guid": "bc91e84b-f231-4997-8e94-7f9fcdddc982",
@@ -439,7 +439,7 @@
       "ruleText": "Level 2: Put a 0/1 crop token into play as my resident. It has \"M, Sacrifice to produce 1 Gaian resource\" and counts as a Flower. Level 4: Your Flowers and Trees get +1/+3.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/bc91e84b-f231-4997-8e94-7f9fcdddc982.webp"
+      "image": "arcmage/rebirth/cards/bc91e84b-f231-4997-8e94-7f9fcdddc982.webp"
     },
     {
       "guid": "8ac5e9f1-c25c-450b-8642-8d20747e43ff",
@@ -454,7 +454,7 @@
       "ruleText": "Put x grassroot counters on target creature and mark it. Each time the creature is marked, add 1 grassroot counter. Target creature does not unmark unless its controller pays 1 for each grassroot counter.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/8ac5e9f1-c25c-450b-8642-8d20747e43ff.webp"
+      "image": "arcmage/rebirth/cards/8ac5e9f1-c25c-450b-8642-8d20747e43ff.webp"
     },
     {
       "guid": "629a5adf-f9d5-44ff-b389-f640f529467a",
@@ -469,7 +469,7 @@
       "ruleText": "Flying - Only creatures with flying and ranged can defend against me. M, Produce 1 Gaian resource or produce 2 Gaian resources if you control at least a flower.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/629a5adf-f9d5-44ff-b389-f640f529467a.webp"
+      "image": "arcmage/rebirth/cards/629a5adf-f9d5-44ff-b389-f640f529467a.webp"
     },
     {
       "guid": "770cdf48-97df-41d8-9d8f-5b6607e99feb",
@@ -484,7 +484,7 @@
       "ruleText": "Flying - Only creatures with flying and ranged can defend against me. Veteran - I am not marked for attacking.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/770cdf48-97df-41d8-9d8f-5b6607e99feb.webp"
+      "image": "arcmage/rebirth/cards/770cdf48-97df-41d8-9d8f-5b6607e99feb.webp"
     },
     {
       "guid": "b9516f1a-6efa-4e8d-977e-0c5220d01f93",
@@ -499,7 +499,7 @@
       "ruleText": "All trees and flowers with peaceful can attack this turn as though they didn't have peaceful.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/b9516f1a-6efa-4e8d-977e-0c5220d01f93.webp"
+      "image": "arcmage/rebirth/cards/b9516f1a-6efa-4e8d-977e-0c5220d01f93.webp"
     },
     {
       "guid": "e2985a28-ee20-4b9e-908c-dddcd2aa1493",
@@ -514,7 +514,7 @@
       "ruleText": "Flying - Only creatures with flying and ranged can defend against me. When I mark for devotion, mark target creature. That creature doesn't unmark during its controller's next unmark phase.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/e2985a28-ee20-4b9e-908c-dddcd2aa1493.webp"
+      "image": "arcmage/rebirth/cards/e2985a28-ee20-4b9e-908c-dddcd2aa1493.webp"
     },
     {
       "guid": "44836060-f6c4-432e-8122-8442ac9ab21a",
@@ -529,7 +529,7 @@
       "ruleText": "Peaceful - I cannot attack. I gain a +1/+1 counter every time you play a Gaian card.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/44836060-f6c4-432e-8122-8442ac9ab21a.webp"
+      "image": "arcmage/rebirth/cards/44836060-f6c4-432e-8122-8442ac9ab21a.webp"
     },
     {
       "guid": "265c1f00-d267-4d0a-a041-eb96921967ba",
@@ -544,7 +544,7 @@
       "ruleText": "Peaceful - I cannot attack. Each time I damage a creature it gets an additional  \"I do not unmark unless my controller puts a -1/-1 counter on me.\"",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/265c1f00-d267-4d0a-a041-eb96921967ba.webp"
+      "image": "arcmage/rebirth/cards/265c1f00-d267-4d0a-a041-eb96921967ba.webp"
     },
     {
       "guid": "a7229396-f9ec-4516-b83d-73e3291b5527",
@@ -559,7 +559,7 @@
       "ruleText": "Level 3: All my residents have sanctuary. Level 5: All residents in your cities have sanctuary. Level 7: All creatures in your army have sanctuary.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/a7229396-f9ec-4516-b83d-73e3291b5527.webp"
+      "image": "arcmage/rebirth/cards/a7229396-f9ec-4516-b83d-73e3291b5527.webp"
     },
     {
       "guid": "09b06049-cf4f-48bd-b48c-dae06ff26bea",
@@ -574,7 +574,7 @@
       "ruleText": "For each other Gaian card in the same city or army, I get +0/+1. If my defense reaches 5 I have ranged and can block creatures with flying.  Peaceful - I cannot attack.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/09b06049-cf4f-48bd-b48c-dae06ff26bea.webp"
+      "image": "arcmage/rebirth/cards/09b06049-cf4f-48bd-b48c-dae06ff26bea.webp"
     },
     {
       "guid": "a4257262-0eb9-482a-aef3-bd930760378a",
@@ -589,7 +589,7 @@
       "ruleText": "Level 3: You may put a creature from your graveyard in your army. Remove it from the game at the start of your next turn. Level 7: You may put a creature from your graveyard in play as one of my residents.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/a4257262-0eb9-482a-aef3-bd930760378a.webp"
+      "image": "arcmage/rebirth/cards/a4257262-0eb9-482a-aef3-bd930760378a.webp"
     },
     {
       "guid": "6d4a048c-627d-4b78-b0f5-5ec64e087cb3",
@@ -604,7 +604,7 @@
       "ruleText": "When I am marked, put the top card of each player's deck into his/her graveyard.",
       "artist": "Kathrin Polikeit",
       "artworkLicensor": "Battle for Wesnoth",
-      "image": "/arcmage/rebirth/cards/6d4a048c-627d-4b78-b0f5-5ec64e087cb3.webp"
+      "image": "arcmage/rebirth/cards/6d4a048c-627d-4b78-b0f5-5ec64e087cb3.webp"
     },
     {
       "guid": "c979c3ad-ee9f-4edf-a404-83ea994b38f2",
@@ -619,7 +619,7 @@
       "ruleText": "When I come into play, each player draws a card. When I leave play, each player discards a card.",
       "artist": "Emilien Rotival",
       "artworkLicensor": "Battle for Wesnoth",
-      "image": "/arcmage/rebirth/cards/c979c3ad-ee9f-4edf-a404-83ea994b38f2.webp"
+      "image": "arcmage/rebirth/cards/c979c3ad-ee9f-4edf-a404-83ea994b38f2.webp"
     },
     {
       "guid": "fa2faaec-1f46-4f6f-bf7e-235731202216",
@@ -634,7 +634,7 @@
       "ruleText": "When its controller marks target enchanted creature all other creatures in the same city or army are also marked.",
       "artist": "Emilien Rotival",
       "artworkLicensor": "Battle for Wesnoth",
-      "image": "/arcmage/rebirth/cards/fa2faaec-1f46-4f6f-bf7e-235731202216.webp"
+      "image": "arcmage/rebirth/cards/fa2faaec-1f46-4f6f-bf7e-235731202216.webp"
     },
     {
       "guid": "0b4587bb-1d6d-45ce-8a72-ed38f7e21b14",
@@ -649,7 +649,7 @@
       "ruleText": "Target creature gains: \"m, mark target creature. It doesn't unmark as long as I am marked. You may choose not to unmark me during your unmark phase.\"",
       "artist": "Kathrin Polikeit",
       "artworkLicensor": "Battle for Wesnoth",
-      "image": "/arcmage/rebirth/cards/0b4587bb-1d6d-45ce-8a72-ed38f7e21b14.webp"
+      "image": "arcmage/rebirth/cards/0b4587bb-1d6d-45ce-8a72-ed38f7e21b14.webp"
     },
     {
       "guid": "34cc33ce-106c-4faa-bbbc-8a8b72c59717",
@@ -664,7 +664,7 @@
       "ruleText": "Mark target creature. You may pay an additional x resources to mark x additional creatures.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/34cc33ce-106c-4faa-bbbc-8a8b72c59717.webp"
+      "image": "arcmage/rebirth/cards/34cc33ce-106c-4faa-bbbc-8a8b72c59717.webp"
     },
     {
       "guid": "48ad92f2-a02c-4133-a6e2-3f669b1f68e4",
@@ -679,7 +679,7 @@
       "ruleText": "Target creature doesn't unmark during its controller's unmark phase.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/48ad92f2-a02c-4133-a6e2-3f669b1f68e4.webp"
+      "image": "arcmage/rebirth/cards/48ad92f2-a02c-4133-a6e2-3f669b1f68e4.webp"
     },
     {
       "guid": "2caf29b1-9d0d-4768-9996-c0d971c57d32",
@@ -694,7 +694,7 @@
       "ruleText": "Counter target spell or destroy target enchantment. Each opponent may draw a card.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/2caf29b1-9d0d-4768-9996-c0d971c57d32.webp"
+      "image": "arcmage/rebirth/cards/2caf29b1-9d0d-4768-9996-c0d971c57d32.webp"
     },
     {
       "guid": "b20145cd-1779-49c8-9f6c-cf96681f5deb",
@@ -709,7 +709,7 @@
       "ruleText": "When I mark for devotion, you may pay 2 to draw a card. My devotion towards the city counts double.",
       "artist": "Kathrin Polikeit",
       "artworkLicensor": "Battle for Wesnoth",
-      "image": "/arcmage/rebirth/cards/b20145cd-1779-49c8-9f6c-cf96681f5deb.webp"
+      "image": "arcmage/rebirth/cards/b20145cd-1779-49c8-9f6c-cf96681f5deb.webp"
     },
     {
       "guid": "248c52c1-b9e4-4b89-9b86-79c98142fe81",
@@ -724,7 +724,7 @@
       "ruleText": "First Strike - In combat, deal damage first. The opposing creature only strikes back if it survives. Blood Vengeance - I come into play with x +1/+0 counters, where x is equal to the damage dealt the previous turn by target opposing creature.",
       "artist": "Emilien Rotival",
       "artworkLicensor": "Battle for Wesnoth",
-      "image": "/arcmage/rebirth/cards/248c52c1-b9e4-4b89-9b86-79c98142fe81.webp"
+      "image": "arcmage/rebirth/cards/248c52c1-b9e4-4b89-9b86-79c98142fe81.webp"
     },
     {
       "guid": "14d7a456-b711-4987-9419-e77f7bd0b9ae",
@@ -739,7 +739,7 @@
       "ruleText": "Flying - Only creatures with flying and ranged can defend against me. When I am moved, you may move target creature along. We are both not marked for moving.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/14d7a456-b711-4987-9419-e77f7bd0b9ae.webp"
+      "image": "arcmage/rebirth/cards/14d7a456-b711-4987-9419-e77f7bd0b9ae.webp"
     },
     {
       "guid": "41a93a33-6b0a-4831-b611-86b22cbbfbe7",
@@ -754,7 +754,7 @@
       "ruleText": "M Look at the top card of target player's deck. 2: Target player puts the top card of his/her deck into his/her graveyard.",
       "artist": "Kathrin Polikeit",
       "artworkLicensor": "Battle for Wesnoth",
-      "image": "/arcmage/rebirth/cards/41a93a33-6b0a-4831-b611-86b22cbbfbe7.webp"
+      "image": "arcmage/rebirth/cards/41a93a33-6b0a-4831-b611-86b22cbbfbe7.webp"
     },
     {
       "guid": "b98b7d62-733e-480a-9da3-93fadb43ccfb",
@@ -769,7 +769,7 @@
       "ruleText": "You may remove House of Nobles cards from your graveyard from the game. The removed cards' loyalty marks add to my devotion. Level 5: Move target creature to a city of the creature's controller. Moving the creature doesn't cause it to mark.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "Santharia Dream",
-      "image": "/arcmage/rebirth/cards/b98b7d62-733e-480a-9da3-93fadb43ccfb.webp"
+      "image": "arcmage/rebirth/cards/b98b7d62-733e-480a-9da3-93fadb43ccfb.webp"
     },
     {
       "guid": "4d03c39b-ed26-4750-b476-ebaa613a65d6",
@@ -784,7 +784,7 @@
       "ruleText": "Bodyguard 3 - Each turn I may divert up to 3 damage from target creature you control and put that damage on myself instead.",
       "artist": "Emilien Rotival",
       "artworkLicensor": "Battle for Wesnoth",
-      "image": "/arcmage/rebirth/cards/4d03c39b-ed26-4750-b476-ebaa613a65d6.webp"
+      "image": "arcmage/rebirth/cards/4d03c39b-ed26-4750-b476-ebaa613a65d6.webp"
     },
     {
       "guid": "ab77e0ae-8ec7-48c0-9485-69842a740b35",
@@ -799,7 +799,7 @@
       "ruleText": "Level 3: Players can only have x resource cards. X is the number of resource cards you control. Level 7: Players can only unmark x creatures during their unmark phase. X is the number of creatures you control.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/ab77e0ae-8ec7-48c0-9485-69842a740b35.webp"
+      "image": "arcmage/rebirth/cards/ab77e0ae-8ec7-48c0-9485-69842a740b35.webp"
     },
     {
       "guid": "9f99fd52-76f5-4569-8ecc-b694ec5da1b0",
@@ -814,7 +814,7 @@
       "ruleText": "Choose one: target player can't draw cards this turn, or target player must draw three cards.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/9f99fd52-76f5-4569-8ecc-b694ec5da1b0.webp"
+      "image": "arcmage/rebirth/cards/9f99fd52-76f5-4569-8ecc-b694ec5da1b0.webp"
     },
     {
       "guid": "4f39453a-08f4-4358-abb8-0d737e156bb9",
@@ -829,7 +829,7 @@
       "ruleText": "Level 2: Target player puts the top card of his/her deck into his/her graveyard. Level 4: Draw a card. Level 6: Target player puts the top card of his/her deck into his/her graveyard.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "Santharia Dream",
-      "image": "/arcmage/rebirth/cards/4f39453a-08f4-4358-abb8-0d737e156bb9.webp"
+      "image": "arcmage/rebirth/cards/4f39453a-08f4-4358-abb8-0d737e156bb9.webp"
     },
     {
       "guid": "60da8f2f-5368-4c2c-8e4a-a27b241a2cc7",
@@ -844,7 +844,7 @@
       "ruleText": "Return target creature to the top of its owner's deck.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/60da8f2f-5368-4c2c-8e4a-a27b241a2cc7.webp"
+      "image": "arcmage/rebirth/cards/60da8f2f-5368-4c2c-8e4a-a27b241a2cc7.webp"
     },
     {
       "guid": "5e18ba56-5602-4f12-b4d1-d7d4c5bbf8e5",
@@ -859,7 +859,7 @@
       "ruleText": "All movement to or from target city is forbidden as long as your army has more creatures than the city's controller's army.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/5e18ba56-5602-4f12-b4d1-d7d4c5bbf8e5.webp"
+      "image": "arcmage/rebirth/cards/5e18ba56-5602-4f12-b4d1-d7d4c5bbf8e5.webp"
     },
     {
       "guid": "58978102-0042-487f-873f-97fab27eef67",
@@ -874,7 +874,7 @@
       "ruleText": "When I attack a city where Little Brother is, I deal 2 additional damage to that city.",
       "artist": "Kathrin Polikeit & Bora Orcal",
       "artworkLicensor": "Battle for Wesnoth",
-      "image": "/arcmage/rebirth/cards/58978102-0042-487f-873f-97fab27eef67.webp"
+      "image": "arcmage/rebirth/cards/58978102-0042-487f-873f-97fab27eef67.webp"
     },
     {
       "guid": "b228e22f-69c3-40e8-992b-45a4b08a40f3",
@@ -889,7 +889,7 @@
       "ruleText": "",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/b228e22f-69c3-40e8-992b-45a4b08a40f3.webp"
+      "image": "arcmage/rebirth/cards/b228e22f-69c3-40e8-992b-45a4b08a40f3.webp"
     },
     {
       "guid": "df11b672-2449-4ca1-b4f1-a8e714429ac0",
@@ -904,7 +904,7 @@
       "ruleText": "When I come into play, steal one resource card from target player and put it under your control. The card retains its resource type and its marked / unmarked state. When I leave play, return the stolen resource card.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/df11b672-2449-4ca1-b4f1-a8e714429ac0.webp"
+      "image": "arcmage/rebirth/cards/df11b672-2449-4ca1-b4f1-a8e714429ac0.webp"
     },
     {
       "guid": "b324e835-8352-4d0b-8426-366c358d9351",
@@ -919,7 +919,7 @@
       "ruleText": "Deal 3 damage to target creature or deal 2 damage to target city.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/b324e835-8352-4d0b-8426-366c358d9351.webp"
+      "image": "arcmage/rebirth/cards/b324e835-8352-4d0b-8426-366c358d9351.webp"
     },
     {
       "guid": "d75d0ba9-0fd9-4eef-a1b2-288a0942a853",
@@ -934,7 +934,7 @@
       "ruleText": "If you control at least 2 other Imps, all your Imps get +2/+0 during your turn and get +0/+2 during any opponent's turn.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/d75d0ba9-0fd9-4eef-a1b2-288a0942a853.webp"
+      "image": "arcmage/rebirth/cards/d75d0ba9-0fd9-4eef-a1b2-288a0942a853.webp"
     },
     {
       "guid": "dba608c3-f47d-445b-a81c-325578baec3f",
@@ -949,7 +949,7 @@
       "ruleText": "Infiltrate - I can move into opponents' cities. I deal 1 damage to the city in which I reside at the beginning of that city's tactics phase.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/dba608c3-f47d-445b-a81c-325578baec3f.webp"
+      "image": "arcmage/rebirth/cards/dba608c3-f47d-445b-a81c-325578baec3f.webp"
     },
     {
       "guid": "c76714eb-4caf-41f4-8607-19cfcd8a1a41",
@@ -964,7 +964,7 @@
       "ruleText": "",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/c76714eb-4caf-41f4-8607-19cfcd8a1a41.webp"
+      "image": "arcmage/rebirth/cards/c76714eb-4caf-41f4-8607-19cfcd8a1a41.webp"
     },
     {
       "guid": "861fe424-64d7-4b3e-a471-17778ba06712",
@@ -979,7 +979,7 @@
       "ruleText": "When I die, deal 1 damage to target creature or city.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/861fe424-64d7-4b3e-a471-17778ba06712.webp"
+      "image": "arcmage/rebirth/cards/861fe424-64d7-4b3e-a471-17778ba06712.webp"
     },
     {
       "guid": "43ea643f-54a6-4663-84b4-418fa3785966",
@@ -994,7 +994,7 @@
       "ruleText": "Mark: All orcs in your army get a +1/+0 counter. Use this ability only when I am in your army as well.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/43ea643f-54a6-4663-84b4-418fa3785966.webp"
+      "image": "arcmage/rebirth/cards/43ea643f-54a6-4663-84b4-418fa3785966.webp"
     },
     {
       "guid": "16092dd0-3ea2-4c91-ab4b-b886dc45be07",
@@ -1009,7 +1009,7 @@
       "ruleText": "Mark: Put a 1/1 Orc creature token into your army marked.",
       "artist": "Emilien Rotival",
       "artworkLicensor": "Battle for Wesnoth",
-      "image": "/arcmage/rebirth/cards/16092dd0-3ea2-4c91-ab4b-b886dc45be07.webp"
+      "image": "arcmage/rebirth/cards/16092dd0-3ea2-4c91-ab4b-b886dc45be07.webp"
     },
     {
       "guid": "f2da7886-560b-4303-b857-adad1a67e75b",
@@ -1024,7 +1024,7 @@
       "ruleText": "When I come into play, unmark target creature.",
       "artist": "Bora Orcal",
       "artworkLicensor": "Battle for Wesnoth",
-      "image": "/arcmage/rebirth/cards/f2da7886-560b-4303-b857-adad1a67e75b.webp"
+      "image": "arcmage/rebirth/cards/f2da7886-560b-4303-b857-adad1a67e75b.webp"
     },
     {
       "guid": "d57012b2-2c8f-40df-b6ec-32cb9975752d",
@@ -1039,7 +1039,7 @@
       "ruleText": "Infiltrate - I can  move into opponents' cities. When I enter a city, that city's owner reveals one card at random from their hand.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/d57012b2-2c8f-40df-b6ec-32cb9975752d.webp"
+      "image": "arcmage/rebirth/cards/d57012b2-2c8f-40df-b6ec-32cb9975752d.webp"
     },
     {
       "guid": "835ed76b-f3b1-4818-8032-7fe79c349e0a",
@@ -1054,7 +1054,7 @@
       "ruleText": "Infiltrate - I can move into opponents' cities. Mark: Deal 2 damage to target creature in the same city as me.",
       "artist": "Emilien Rotival",
       "artworkLicensor": "Battle for Wesnoth",
-      "image": "/arcmage/rebirth/cards/835ed76b-f3b1-4818-8032-7fe79c349e0a.webp"
+      "image": "arcmage/rebirth/cards/835ed76b-f3b1-4818-8032-7fe79c349e0a.webp"
     },
     {
       "guid": "c08e4663-0a52-4a54-b702-4ecc19001980",
@@ -1069,7 +1069,7 @@
       "ruleText": "Unique - No player can control more than one of me at any time. Orcs you control get +1/+0.",
       "artist": "Emilien Rotival",
       "artworkLicensor": "Battle for Wesnoth",
-      "image": "/arcmage/rebirth/cards/c08e4663-0a52-4a54-b702-4ecc19001980.webp"
+      "image": "arcmage/rebirth/cards/c08e4663-0a52-4a54-b702-4ecc19001980.webp"
     },
     {
       "guid": "2493d016-fc78-473c-9f4f-e5f9589adf0d",
@@ -1084,7 +1084,7 @@
       "ruleText": "Until end of turn, target army cannot defend target city.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/2493d016-fc78-473c-9f4f-e5f9589adf0d.webp"
+      "image": "arcmage/rebirth/cards/2493d016-fc78-473c-9f4f-e5f9589adf0d.webp"
     },
     {
       "guid": "b1f86aab-92fc-4d8b-80cd-36e559d2f5ef",
@@ -1099,7 +1099,7 @@
       "ruleText": "Level 3: All creatures in your army get +2/+2. Level 5: All creatures in your army have overrun.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/b1f86aab-92fc-4d8b-80cd-36e559d2f5ef.webp"
+      "image": "arcmage/rebirth/cards/b1f86aab-92fc-4d8b-80cd-36e559d2f5ef.webp"
     },
     {
       "guid": "9a8d0186-c805-4f3d-a62d-75140ad2fb04",
@@ -1114,7 +1114,7 @@
       "ruleText": "Level 2: Produce 2 Red Banner resources. Level 4: All creatures in your cities gain travel. (Creatures with travel are not bound by the move limit. Level 7: All creatures in your hand gain sudden.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/9a8d0186-c805-4f3d-a62d-75140ad2fb04.webp"
+      "image": "arcmage/rebirth/cards/9a8d0186-c805-4f3d-a62d-75140ad2fb04.webp"
     },
     {
       "guid": "3d9c7b22-58ab-48f2-9d57-468261683a93",
@@ -1129,7 +1129,7 @@
       "ruleText": "Level 2: Put a 1/1 Orc token into your army marked. Level 5: Put a 3/3 Orc token into your army marked.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/3d9c7b22-58ab-48f2-9d57-468261683a93.webp"
+      "image": "arcmage/rebirth/cards/3d9c7b22-58ab-48f2-9d57-468261683a93.webp"
     },
     {
       "guid": "44d030ea-99d1-41a0-92e8-b62caab5a05c",
@@ -1144,7 +1144,7 @@
       "ruleText": "I deal 2 damage to each creature defending against me.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/44d030ea-99d1-41a0-92e8-b62caab5a05c.webp"
+      "image": "arcmage/rebirth/cards/44d030ea-99d1-41a0-92e8-b62caab5a05c.webp"
     },
     {
       "guid": "e077af2e-97cd-491f-8e41-9f16b324f7bc",
@@ -1159,7 +1159,7 @@
       "ruleText": "When I mark for devotion, I give a creature in your army a rabies counter. (Creatures with rabies must attack each turn if able. Any creature damaged by a creature with rabies gains rabies. At the end of a player's turn, they must sacrifice all creatures with rabies.)",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/e077af2e-97cd-491f-8e41-9f16b324f7bc.webp"
+      "image": "arcmage/rebirth/cards/e077af2e-97cd-491f-8e41-9f16b324f7bc.webp"
     },
     {
       "guid": "af6b2fe4-a59f-4519-9945-9c0b965f806b",
@@ -1174,7 +1174,7 @@
       "ruleText": "Sudden - I can be played directly into your army. When I die, put a 1/1 Orc creature token into your army.",
       "artist": "Kathrin Polikeit",
       "artworkLicensor": "Battle for Wesnoth",
-      "image": "/arcmage/rebirth/cards/af6b2fe4-a59f-4519-9945-9c0b965f806b.webp"
+      "image": "arcmage/rebirth/cards/af6b2fe4-a59f-4519-9945-9c0b965f806b.webp"
     },
     {
       "guid": "9c9c5c4f-3b05-4789-9860-d24daf32fca0",
@@ -1189,7 +1189,7 @@
       "ruleText": "Level 2: Your Soldiers get +1/+1. Level 4: Your Soldiers have first strike. (Creatures with first strike deal damage first in combat. The opposing creature only gets to strike back if it survives.)",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/9c9c5c4f-3b05-4789-9860-d24daf32fca0.webp"
+      "image": "arcmage/rebirth/cards/9c9c5c4f-3b05-4789-9860-d24daf32fca0.webp"
     },
     {
       "guid": "236d527c-c22d-460b-9ec8-684e6b8da952",
@@ -1204,7 +1204,7 @@
       "ruleText": "Move all unmarked Soldiers from your cities into your army. The Soldiers are not marked for moving.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/236d527c-c22d-460b-9ec8-684e6b8da952.webp"
+      "image": "arcmage/rebirth/cards/236d527c-c22d-460b-9ec8-684e6b8da952.webp"
     },
     {
       "guid": "b5cb9237-8084-4d44-b31c-9d001928de51",
@@ -1219,7 +1219,7 @@
       "ruleText": "Level 3: Your Soldiers cost 1 less to play. Level 5: Put a Soldier from your hand into your army.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/b5cb9237-8084-4d44-b31c-9d001928de51.webp"
+      "image": "arcmage/rebirth/cards/b5cb9237-8084-4d44-b31c-9d001928de51.webp"
     },
     {
       "guid": "05e24047-1ed1-40d7-9c3b-a5769422cdd8",
@@ -1234,7 +1234,7 @@
       "ruleText": "All Soldiers you control get +2/+0 and have overrun until end of turn.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/05e24047-1ed1-40d7-9c3b-a5769422cdd8.webp"
+      "image": "arcmage/rebirth/cards/05e24047-1ed1-40d7-9c3b-a5769422cdd8.webp"
     },
     {
       "guid": "d7956279-7d26-47bc-afc7-3a87af1af724",
@@ -1249,7 +1249,7 @@
       "ruleText": "Whenever I deal damage to a city, you may put a Soldier from your hand into a city you control. First Strike - I deal damage first. The opposing creature only strikes back if it survives.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/d7956279-7d26-47bc-afc7-3a87af1af724.webp"
+      "image": "arcmage/rebirth/cards/d7956279-7d26-47bc-afc7-3a87af1af724.webp"
     },
     {
       "guid": "195de97f-43d6-4b55-961f-b8807a26c670",
@@ -1264,7 +1264,7 @@
       "ruleText": "Level 1: Sacrifice a resource card for every creature you control. Level 3: After your combat phase, unmark all creatures in your army and have a second combat phase.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/195de97f-43d6-4b55-961f-b8807a26c670.webp"
+      "image": "arcmage/rebirth/cards/195de97f-43d6-4b55-961f-b8807a26c670.webp"
     },
     {
       "guid": "c816fa46-fd19-4351-bcec-f9c536fdb33b",
@@ -1279,7 +1279,7 @@
       "ruleText": "When I come into play, you may search your deck and reveal any number of Soldiers. Shuffle your deck and put the soldiers on top of your deck in any order.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/c816fa46-fd19-4351-bcec-f9c536fdb33b.webp"
+      "image": "arcmage/rebirth/cards/c816fa46-fd19-4351-bcec-f9c536fdb33b.webp"
     },
     {
       "guid": "fdc5e072-f3bb-4156-992f-16d322651fd9",
@@ -1294,7 +1294,7 @@
       "ruleText": "Choose one: deal 1 damage to a target city, or deal 3 damage to 1 target creature, or deal 1 damage to 3 target creatures.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/fdc5e072-f3bb-4156-992f-16d322651fd9.webp"
+      "image": "arcmage/rebirth/cards/fdc5e072-f3bb-4156-992f-16d322651fd9.webp"
     },
     {
       "guid": "b9951f4e-1c63-4a03-b7b2-787e904effaa",
@@ -1309,7 +1309,7 @@
       "ruleText": "When I come into play, you may pay 1 for each Footsoldier in play. If you do pay, then search your deck for a Footsolidier and put it into your army. Shuffle your deck.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/b9951f4e-1c63-4a03-b7b2-787e904effaa.webp"
+      "image": "arcmage/rebirth/cards/b9951f4e-1c63-4a03-b7b2-787e904effaa.webp"
     },
     {
       "guid": "c4ef9b38-e319-42fd-88e4-4315fb474e3b",
@@ -1324,7 +1324,7 @@
       "ruleText": "When I come into play, you may search your deck for a soldier and put it in your hand. Shuffle your deck.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/c4ef9b38-e319-42fd-88e4-4315fb474e3b.webp"
+      "image": "arcmage/rebirth/cards/c4ef9b38-e319-42fd-88e4-4315fb474e3b.webp"
     },
     {
       "guid": "876ad6e3-d234-40fa-b97d-42476ffdcb26",
@@ -1339,7 +1339,7 @@
       "ruleText": "First Strike - In combat, I deal damage first. The opposing creature only strikes back if it survives. Sudden - I can be played directly into your army. If I have attacked this turn, put me in the graveyard during your discard phase.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/876ad6e3-d234-40fa-b97d-42476ffdcb26.webp"
+      "image": "arcmage/rebirth/cards/876ad6e3-d234-40fa-b97d-42476ffdcb26.webp"
     },
     {
       "guid": "bb5ff7d0-0e35-42a0-ac8d-1f6e0b9d7d4b",
@@ -1354,7 +1354,7 @@
       "ruleText": "Flying - Only creatures with flying and ranged can defend against me. I get +2/+1 when blocking creatures without flying.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/bb5ff7d0-0e35-42a0-ac8d-1f6e0b9d7d4b.webp"
+      "image": "arcmage/rebirth/cards/bb5ff7d0-0e35-42a0-ac8d-1f6e0b9d7d4b.webp"
     },
     {
       "guid": "95ffdd8b-4eb4-4e58-b92a-65c1b979cab9",
@@ -1369,7 +1369,7 @@
       "ruleText": "Creatures you play this turn have blood vengeance (they come into play with x +1/+0 counters, where x is equal to the damage dealt the previous turn by target opposing creature). Salvage 5 - You may pay 5 resources to return me to your hand from the graveyard.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/95ffdd8b-4eb4-4e58-b92a-65c1b979cab9.webp"
+      "image": "arcmage/rebirth/cards/95ffdd8b-4eb4-4e58-b92a-65c1b979cab9.webp"
     },
     {
       "guid": "166cc883-af72-42b4-b74c-a28ecb0a4bad",
@@ -1384,7 +1384,7 @@
       "ruleText": "Target city gains 3 defense points and can only sustain 1 damage each turn. Destroy all other cities you control.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/166cc883-af72-42b4-b74c-a28ecb0a4bad.webp"
+      "image": "arcmage/rebirth/cards/166cc883-af72-42b4-b74c-a28ecb0a4bad.webp"
     },
     {
       "guid": "defca6a3-a304-482c-ba32-b62a703c76e9",
@@ -1399,7 +1399,7 @@
       "ruleText": "All unmarked Soldiers in your army must attack during your combat phase. Battle Scream 1 - When I attack, all other attacking creatures get +1/+0.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/defca6a3-a304-482c-ba32-b62a703c76e9.webp"
+      "image": "arcmage/rebirth/cards/defca6a3-a304-482c-ba32-b62a703c76e9.webp"
     },
     {
       "guid": "ae365dad-637e-42d0-b547-24e496deebae",
@@ -1414,7 +1414,7 @@
       "ruleText": "When I come into play, reveal the top 4 cards of your deck. Put each revealed Soldier in your hand and put any other card on the bottom of your deck.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/ae365dad-637e-42d0-b547-24e496deebae.webp"
+      "image": "arcmage/rebirth/cards/ae365dad-637e-42d0-b547-24e496deebae.webp"
     },
     {
       "guid": "37cbf8bd-0bbb-4d04-891d-caf53943468e",
@@ -1429,7 +1429,7 @@
       "ruleText": "m, Mark two Soldiers you control, deal 5 damage to target creature. The marked Soldiers and I do not unmark in your next two unmark phases.",
       "artist": "Santiago Iborra",
       "artworkLicensor": "wtactics.org",
-      "image": "/arcmage/rebirth/cards/37cbf8bd-0bbb-4d04-891d-caf53943468e.webp"
+      "image": "arcmage/rebirth/cards/37cbf8bd-0bbb-4d04-891d-caf53943468e.webp"
     }
   ]
 }

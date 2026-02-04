@@ -65,7 +65,9 @@ def main() -> int:
             url = webp_path if webp_path.startswith("http") else f"{BASE}{webp_path}"
             ext = ".webp" if "/card.webp" in url or url.endswith(".webp") else ".jpg"
             out_file = OUT_IMG / f"{guid}{ext}"
-            local_rel = f"/arcmage/rebirth/cards/{out_file.name}"
+            # IMPORTANT: On GitHub Pages, the app is served under /<repo>/.
+            # Use a *relative* URL so it works both locally and on Pages.
+            local_rel = f"arcmage/rebirth/cards/{out_file.name}"
 
             if not out_file.exists() or out_file.stat().st_size == 0:
                 r = requests.get(url, timeout=60)
