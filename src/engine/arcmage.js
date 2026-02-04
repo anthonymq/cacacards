@@ -740,7 +740,39 @@ function endOfTurnCleanup(state) {
   }
 }
 
-// ---------------- AI (baseline, rule-legal-ish) ----------------
+// ---------------- AI opponent (baseline, rule-legal-ish) ----------------
+
+const FACTIONS = ['Gaian', 'Dark Legion', 'Red Banner', 'House of Nobles', 'The Empire']
+
+function recommendResourceFactionForEnemy(state) {
+  // Same idea as UI helper: choose a faction that best satisfies loyalty needs.
+  const p = state.enemy
+  let best = 'Gaian'
+  let bestScore = -1
+
+  const handCreatures = p.hand.filter((c) => String(c.type || '').toLowerCase() === 'creature')
+
+  for (const f of FACTIONS) {
+    let score = 0
+    for (const c of handCreatures) {
+      const cost = nint(c.cost, 0)
+      const loyalty = Math.max(0, nint(c.loyalty, 0))
+      const neededLoy = Math.min(cost, loyalty)
+
+      const factionAvail = availableResources(p, c.faction || 'Unknown') + (c.faction === f ? 1 : 0)
+      const totalAvail = totalAvailableResources(p) + 1
+
+      if (totalAvail >= cost && factionAvail >= neededLoy) score += 1
+    }
+
+    if (score > bestScore) {
+      bestScore = score
+      best = f
+    }
+  }
+
+  return best
+}
 
 function runEnemyAI(state) {
   if (state.gameOver) return
@@ -764,7 +796,7 @@ function runEnemyAI(state) {
     }
 
     if (p.hand.length > 0 && canPlayResource(state, who)) {
-      const f = p.hand[0].faction || 'Dark Legion'
+      const f = recommendResourceFactionForEnemy(state)
       playResource(state, who, p.hand[0].id, f)
     }
 
@@ -783,11 +815,17 @@ function runEnemyAI(state) {
     // 2) play creatures into first city if affordable.
     const city = p.kingdom[0]
     if (city) {
-      const playable = p.hand.filter((c) => isType(c, 'creature')).sort((a, b) => nint(a.cost) - nint(b.cost))
+      const playable = p.hand
+        .filter((c) => isType(c, 'creature'))
+        .sort((a, b) => nint(a.cost) - nint(b.cost))
+
+      // try to play up to 2 creatures if resources allow
+      let plays = 0
       for (const c of playable) {
         if (canPlayCardToCity(state, who, c.id, city.id)) {
           playCreatureToCity(state, who, c.id, city.id)
-          break
+          plays += 1
+          if (plays >= 2) break
         }
       }
 
