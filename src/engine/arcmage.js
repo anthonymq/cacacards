@@ -6,6 +6,7 @@
 // card-text ability parser/keywords, devotion/tactics effects, prerequisites/targets.
 
 import rebirth from '../data/rebirth.json'
+import { DECKS } from '../data/decks/index.js'
 
 export const PHASES = /** @type {const} */ ([
   'unmark',
@@ -59,9 +60,24 @@ export function buildRebirthDeck45() {
   return deck.map((c) => ({ ...c }))
 }
 
-export function createInitialState() {
-  const deckA = buildRebirthDeck45()
-  const deckB = buildRebirthDeck45()
+export function buildDeckFromPrecon(deckId) {
+  const def = DECKS.find((d) => d.id === deckId) || DECKS[0]
+  const cards = def?.data?.cards || []
+
+  const out = []
+  for (const c of cards) {
+    const qty = Math.max(1, Number(c.quantity || 1))
+    for (let i = 0; i < qty; i++) out.push({ ...c })
+  }
+
+  // Ensure exactly 45 (some exports might differ). Trim or pad with repeats.
+  while (out.length < 45 && out.length > 0) out.push({ ...out[out.length % out.length] })
+  return out.slice(0, 45)
+}
+
+export function createInitialState(opts = {}) {
+  const deckA = opts.playerDeckId ? buildDeckFromPrecon(opts.playerDeckId) : buildRebirthDeck45()
+  const deckB = opts.enemyDeckId ? buildDeckFromPrecon(opts.enemyDeckId) : buildRebirthDeck45()
 
   const mkPlayer = (name, deck) => {
     const cities = deck.filter((c) => isType(c, 'city')).slice(0, 3)
