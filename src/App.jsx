@@ -97,6 +97,11 @@ import {
   resolveAttack,
   setDefenseAssignment,
   confirmDefense,
+  setDamageAllocation,
+  confirmDamageSplit,
+  resolveStack,
+  canPlaySpell,
+  playSpell,
   resourceSummary,
   recommendResourceFaction,
 } from './engine/arcmage.js'
@@ -426,6 +431,52 @@ export default function App() {
         </div>
       ) : null}
 
+      {state.pendingDamageSplit ? (
+        <div className="board" style={{ position: 'fixed', inset: 12, zIndex: 81, overflow: 'auto' }}>
+          <div className="boardTitle">
+            <div>Damage split</div>
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+              <span className="pill">Attacker: {state.pendingDamageSplit.attackerName}</span>
+              <span className="pill">Assign: {state.pendingDamageSplit.atk}</span>
+            </div>
+          </div>
+
+          <div className="footerHint">Tap + / − to allocate damage across defenders. (ArcMage: attacker chooses distribution.)</div>
+
+          <div className="lanes">
+            {state.pendingDamageSplit.defenderIds.map((id) => {
+              const defenders = [...state.enemy.army, ...state.enemy.kingdom.flatMap((c) => c.residents)]
+              const d = defenders.find((x) => x.id === id)
+              if (!d) return null
+              const alloc = Number(state.pendingDamageSplit.allocations?.[id] || 0)
+              return (
+                <div key={id} className="card">
+                  <div className="cardTitle">{d.name}</div>
+                  <div className="cardMeta">
+                    <span>{d.atk}/{d.def}</span>
+                    <span>Alloc: {alloc}</span>
+                  </div>
+                  <div style={{ marginTop: 6, display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                    <FactionBadge faction={d.faction} />
+                  </div>
+                  <CardImage src={d.card?.image} alt={d.name} />
+                  <div className="cardBtnRow">
+                    <button onClick={() => setState((prev) => { const s = structuredClone(prev); setDamageAllocation(s, id, -1); return s })}>-</button>
+                    <button onClick={() => setState((prev) => { const s = structuredClone(prev); setDamageAllocation(s, id, +1); return s })}>+</button>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+
+          <div style={{ display: 'flex', gap: 10, marginTop: 12, flexWrap: 'wrap', alignItems: 'center' }}>
+            <span className="pill">Assigned: {Object.values(state.pendingDamageSplit.allocations || {}).reduce((s,v)=>s+Number(v||0),0)}/{state.pendingDamageSplit.atk}</span>
+            <button onClick={() => setState((prev) => { const s = structuredClone(prev); confirmDamageSplit(s); return s })}>Confirm split</button>
+          </div>
+        </div>
+      ) : null}
+
+
       <div className="topbar">
         <div>
           <div style={{ fontWeight: 800, letterSpacing: 0.3 }}>CacaCards</div>
@@ -510,6 +561,25 @@ export default function App() {
             )
           })}
         </div>
+
+        {state.stack && state.stack.length ? (
+          <div style={{ marginTop: 10 }}>
+            <div className="footerHint" style={{ marginTop: 0 }}>Stack (events): {state.stack.length}</div>
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
+              <button
+                onClick={() => {
+                  setState((prev) => {
+                    const s = structuredClone(prev)
+                    resolveStack(s)
+                    return s
+                  })
+                }}
+              >
+                Resolve stack
+              </button>
+            </div>
+          </div>
+        ) : null}
       </div>
 
       {isYourTurn && state.phase === 'draw_resource' && !state.gameOver ? (
@@ -661,22 +731,28 @@ export default function App() {
 
             const pay = canPayCardNow(state, 'player', c)
             const canRes = inDR && canPlayResource(state, 'player')
-            const canPlayHere = inPlay && !!you.kingdom[0] && canPlayCardToCity(state, 'player', c.id, you.kingdom[0].id)
+
+            const isCreature = String(c.type || '').toLowerCase() === 'creature'
+            const isSpell = ['magic', 'enchantment', 'event'].includes(String(c.type || '').toLowerCase())
+
+            const canPlayCreatureHere = inPlay && isCreature && !!you.kingdom[0] && canPlayCardToCity(state, 'player', c.id, you.kingdom[0].id)
+            const canPlaySpellNow = (inPlay || String(c.type || '').toLowerCase() === 'event') && isSpell && canPlaySpell(state, 'player', c.id)
 
             const label = inDR
               ? (you.drawResourceChoice ? (canRes ? 'Resource' : 'Limit reached') : 'Choose option')
-              : (inPlay ? (canPlayHere ? 'Play' : 'Cannot') : '—')
+              : (inPlay ? ((canPlayCreatureHere || canPlaySpellNow) ? 'Play' : 'Cannot') : (String(c.type || '').toLowerCase() === 'event' ? (canPlaySpellNow ? 'Play event' : 'Cannot') : '—'))
 
             const hint = inPlay
               ? (pay.ok ? 'Playable (cost + loyalty OK)' : `Not playable: ${pay.reason}`)
-              : (inDR ? 'Tip: A resource can be ANY faction. Pick the faction you need for loyalty.' : null)
+              : (inDR ? 'Tip: A resource can be ANY faction. Pick the faction you need for loyalty.' : (String(c.type || '').toLowerCase() === 'event' ? 'Event can be played anytime (stack).' : null))
 
             const disabled =
               !isYourTurn ||
               state.gameOver ||
               (inDR && !canRes) ||
-              (inPlay && !canPlayHere) ||
-              (!inDR && !inPlay)
+              (!inDR && !inPlay && String(c.type || '').toLowerCase() !== 'event') ||
+              (inPlay && !(canPlayCreatureHere || canPlaySpellNow)) ||
+              (!inDR && !inPlay && String(c.type || '').toLowerCase() === 'event' && !canPlaySpellNow)
 
             return (
               <HandCard
@@ -701,6 +777,13 @@ export default function App() {
                       const city = s.player.kingdom[0]
                       if (city && canPlayCardToCity(s, 'player', c.id, city.id)) {
                         playCreatureToCity(s, 'player', c.id, city.id)
+                      } else if (canPlaySpell(s, 'player', c.id)) {
+                        // best-effort target: selected creature if any
+                        playSpell(s, 'player', c.id, null)
+                      }
+                    } else if (String(c.type || '').toLowerCase() === 'event') {
+                      if (canPlaySpell(s, 'player', c.id)) {
+                        playSpell(s, 'player', c.id, null)
                       }
                     }
 

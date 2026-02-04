@@ -113,8 +113,10 @@ export function createInitialState(opts = {}) {
     log: ['Game start'],
     gameOver: false,
     winner: null,
-    // WIP combat prompts
+    // WIP combat + stack prompts
     pendingDefense: null,
+    pendingDamageSplit: null,
+    stack: [], // [{ id, who, card }]
     // legacy (unused)
     selectedAttackerId: null,
     selectedDefenderCityId: null,
@@ -413,6 +415,7 @@ function buildCreatureInstance(card) {
     marked: false,
     // damage is per-turn (resets end of turn)
     damage: 0,
+    attachments: [], // enchantments etc.
   }
 }
 
@@ -438,6 +441,107 @@ export function canPlayCardToCity(state, who, handCardId, cityId) {
   if (!canPayCostWithLoyalty(p, faction, cost, loyalty)) return false
 
   return true
+}
+
+export function canPlaySpell(state, who, handCardId) {
+  if (state.gameOver) return false
+  if (state.current !== who) return false
+  const p = state[who]
+  const card = p.hand.find((c) => c.id === handCardId)
+  if (!card) return false
+
+  const type = String(card.type || '').toLowerCase()
+
+  if (type === 'magic' || type === 'enchantment') {
+    if (!(state.phase === 'play_1' || state.phase === 'play_2')) return false
+  }
+
+  if (type === 'event') {
+    // any time
+  } else if (!(type === 'magic' || type === 'enchantment')) {
+    return false
+  }
+
+  const cost = nint(card.cost, 0)
+  if (cost <= 0) return false
+
+  const faction = card.faction || 'Unknown'
+  const loyalty = nint(card.loyalty, 0)
+  if (!canPayCostWithLoyalty(p, faction, cost, loyalty)) return false
+
+  return true
+}
+
+function moveHandCardToGraveyard(p, handIdx, card, state, who) {
+  p.hand.splice(handIdx, 1)
+  p.graveyard.push(card)
+  state.log.unshift(`${p.name} uses ${card.name} (${card.type}).`)
+}
+
+export function playSpell(state, who, handCardId, target = null) {
+  if (!canPlaySpell(state, who, handCardId)) return
+  const p = state[who]
+  const idx = p.hand.findIndex((c) => c.id === handCardId)
+  if (idx < 0) return
+  const card = p.hand[idx]
+
+  const cost = nint(card.cost, 0)
+  const faction = card.faction || 'Unknown'
+  const loyalty = nint(card.loyalty, 0)
+  if (!payCostWithLoyalty(p, faction, cost, loyalty)) return
+
+  const type = String(card.type || '').toLowerCase()
+
+  if (type === 'magic') {
+    // resolves then goes to graveyard
+    moveHandCardToGraveyard(p, idx, card, state, who)
+    return
+  }
+
+  if (type === 'enchantment') {
+    // attach to target if provided; otherwise treat as global enchantment in army
+    p.hand.splice(idx, 1)
+    const ench = { id: uid('ench'), card }
+
+    if (target && target.kind === 'creature') {
+      const all = [...p.army]
+      for (const city of p.kingdom) all.push(...city.residents)
+      const cr = all.find((x) => x.id === target.id)
+      if (cr) {
+        cr.attachments.push(ench)
+        state.log.unshift(`${p.name} enchants ${cr.name} with ${card.name}.`)
+        return
+      }
+    }
+
+    // global enchantment pile (WIP)
+    if (!p.enchantments) p.enchantments = []
+    p.enchantments.push(ench)
+    state.log.unshift(`${p.name} plays enchantment ${card.name}.`)
+    return
+  }
+
+  if (type === 'event') {
+    // push to stack (WIP). For now: no reactions; resolve immediately.
+    p.hand.splice(idx, 1)
+    const entry = { id: uid('stk'), who, card }
+    state.stack.push(entry)
+    state.log.unshift(`${p.name} plays event ${card.name} (stack).`)
+
+    // auto-resolve for now
+    resolveStack(state)
+    return
+  }
+}
+
+export function resolveStack(state) {
+  while (state.stack.length) {
+    const top = state.stack.pop()
+    const p = state[top.who]
+    // No effect system yet; just discard
+    p.graveyard.push(top.card)
+    state.log.unshift(`${p.name}'s event resolves: ${top.card.name}.`)
+  }
 }
 
 function canPayCostWithLoyalty(p, faction, cost, loyalty) {
@@ -580,7 +684,7 @@ function getAvailableDefenders(defP, targetCity) {
   return [...defP.army, ...targetCity.residents].filter((c) => !c.marked)
 }
 
-function resolveAttackWithAssignments(state, who, attackerIds, targetCityId, assignmentsObj) {
+function resolveAttackWithAssignments(state, who, attackerIds, targetCityId, assignmentsObj, opts = {}) {
   const atkP = state[who]
   const defWho = who === 'player' ? 'enemy' : 'player'
   const defP = state[defWho]
@@ -634,18 +738,47 @@ function resolveAttackWithAssignments(state, who, attackerIds, targetCityId, ass
     a.damage += dmgToAttacker
 
     // distribute attacker damage across multiple defenders.
-    // ArcMage: attacker chooses distribution. Until UI exists, we use a deterministic policy:
-    // put damage into defenders in order, trying to kill earlier defenders first.
-    let remaining = a.atk
-    for (const d of defs) {
-      if (remaining <= 0) break
-      const toKill = Math.max(0, d.def - d.damage)
-      const dealt = toKill > 0 ? Math.min(remaining, toKill) : remaining
-      d.damage += dealt
-      remaining -= dealt
+    // ArcMage: attacker chooses distribution.
+    // - If the attacker is the human player and there are multiple defenders, prompt for split.
+    // - Otherwise, use a deterministic policy (kill in order then dump).
+
+    const allowSplitPrompt = opts.allowSplitPrompt !== false
+    if (allowSplitPrompt && who === 'player' && defs.length > 1 && !state.pendingDamageSplit) {
+      state.pendingDamageSplit = {
+        attackerId: a.id,
+        attackerName: a.name,
+        atk: a.atk,
+        defenderIds: defs.map((d) => d.id),
+        allocations: {},
+        context: {
+          who,
+          attackerIds,
+          targetCityId,
+          assignmentsObj,
+        },
+      }
+      state.log.unshift(`Damage split: assign ${a.atk} damage from ${a.name}.`)
+      return
     }
-    // if any damage remains (all would-be-kills filled), dump into first defender
-    if (remaining > 0 && defs[0]) defs[0].damage += remaining
+
+    // If we have a forced allocation (from UI), apply it.
+    if (opts.forcedAllocations && opts.forcedAllocations[a.id]) {
+      const alloc = opts.forcedAllocations[a.id]
+      for (const d of defs) {
+        const dmg = Number((alloc || {})[d.id] || 0)
+        if (dmg > 0) d.damage += dmg
+      }
+    } else {
+      let remaining = a.atk
+      for (const d of defs) {
+        if (remaining <= 0) break
+        const toKill = Math.max(0, d.def - d.damage)
+        const dealt = toKill > 0 ? Math.min(remaining, toKill) : remaining
+        d.damage += dealt
+        remaining -= dealt
+      }
+      if (remaining > 0 && defs[0]) defs[0].damage += remaining
+    }
 
     state.log.unshift(`${atkP.name}'s ${a.name} battles ${defs.map((d) => d.name).join(', ')}.`)
   }
@@ -754,6 +887,41 @@ export function cleanupDeaths(state) {
       }
     }
   }
+}
+
+export function setDamageAllocation(state, defenderId, delta) {
+  const pd = state.pendingDamageSplit
+  if (!pd) return
+  const current = Number(pd.allocations[defenderId] || 0)
+  const next = Math.max(0, current + delta)
+  pd.allocations[defenderId] = next
+}
+
+export function confirmDamageSplit(state) {
+  const pd = state.pendingDamageSplit
+  if (!pd) return
+
+  const { attackerId, atk, allocations, context } = pd
+
+  // Validate sum == atk
+  const sum = Object.values(allocations || {}).reduce((s, v) => s + Number(v || 0), 0)
+  if (sum !== atk) {
+    state.log.unshift(`Damage split invalid: assigned ${sum}/${atk}.`)
+    return
+  }
+
+  state.pendingDamageSplit = null
+
+  // Continue resolving the same combat.
+  // We re-run resolution with a forced allocation for the prompting attacker.
+  resolveAttackWithAssignments(
+    state,
+    context.who,
+    context.attackerIds,
+    context.targetCityId,
+    context.assignmentsObj,
+    { allowSplitPrompt: false, forcedAllocations: { [attackerId]: allocations } }
+  )
 }
 
 export function destroyCity(state, who, cityId) {
