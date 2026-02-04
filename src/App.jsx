@@ -178,7 +178,9 @@ export default function App() {
       <div className="header">
         <div>
           <div style={{ fontSize: 18, fontWeight: 900 }}>CacaCards</div>
-          <div style={{ opacity: 0.8, fontSize: 12 }}>A tiny browser card game MVP inspired by arcmage.org</div>
+          <div style={{ opacity: 0.8, fontSize: 12 }}>
+            A tiny browser card game MVP inspired by arcmage.org — using Rebirth set creature cards (simplified rules)
+          </div>
         </div>
 
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
@@ -214,7 +216,7 @@ export default function App() {
         </div>
 
         <div className="footerHint">
-          Disclaimer: this is not affiliated with arcmage.org — just a small MVP to iterate on.
+          Disclaimer: not affiliated with arcmage.org — this is a small MVP. Rebirth assets: see <code>public/arcmage/rebirth/LICENSE.md</code>.
         </div>
       </div>
     </div>

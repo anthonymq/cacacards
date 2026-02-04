@@ -13,50 +13,75 @@ export function uid(prefix = 'id') {
 
 import rebirth from './data/rebirth.json'
 
-export function sampleDecks() {
-  const minion = (name, cost, atk, hp, text = '', image = null) => ({ type: 'minion', name, cost, atk, hp, text, image })
+function toIntCost(cost) {
+  const n = Number.parseInt(String(cost ?? '').replace(/[^0-9]/g, ''), 10)
+  return Number.isFinite(n) ? n : 0
+}
 
-  // Build sample decks using real Rebirth card images (local copies).
-  // We keep the toy stats for now; this is about using the official assets cleanly.
-  const byName = new Map((rebirth.cards || []).map((c) => [c.name, c]))
-  const img = (name) => (byName.get(name)?.image || null)
+function toMvpStats(card) {
+  // Rebirth includes many card types; for the MVP we only play "Creature" cards.
+  // We don't implement full ArcMage rules yet, so we derive simple stats from cost.
+  const c = Math.max(1, Math.min(10, toIntCost(card.cost) || 1))
+  return { atk: Math.max(1, Math.round(c)), hp: Math.max(1, Math.round(c + 1)) }
+}
 
-  const deckA = [
-    minion('Goblin Intern', 1, 1, 1, 'Cheap and cheerful.', img('Goblin Intern')),
-    minion('Street Rat', 1, 1, 2, 'Harder to remove than it looks.', img('Street Rat')),
-    minion('Arc Spark', 2, 2, 1, 'Glass cannon.', img('Arc Spark')),
-    minion('Book Thief', 2, 2, 2, 'Steals tempo, not books.', img('Book Thief')),
-    minion('Shielded Duck', 3, 2, 4, 'Quack. (It tanks.)', img('Shielded Duck')),
-    minion('Grumpy Golem', 3, 3, 3, 'Midrange staple.', img('Grumpy Golem')),
-    minion('Clockwork Hound', 4, 4, 3, 'Bites once, bites hard.', img('Clockwork Hound')),
-    minion('Arc Adept', 4, 3, 5, 'Value body.', img('Arc Adept')),
-    minion('Ogre Accountant', 5, 5, 5, 'Counts damage. Incorrectly.', img('Ogre Accountant')),
-    minion('Big Bad Banana', 6, 7, 6, 'Too much potassium.', img('Big Bad Banana')),
-  ]
-
-  const deckB = [
-    minion('Skeleton', 1, 1, 1, 'Spooky.', img('Skeleton')),
-    minion('Candle Wisp', 1, 2, 1, 'Hot take.', img('Candle Wisp')),
-    minion('Frog Knight', 2, 2, 2, 'Ribbit & rip.', img('Frog Knight')),
-    minion('Library Ghoul', 2, 1, 3, 'Lives in comments.', img('Library Ghoul')),
-    minion('Stone Turtle', 3, 1, 6, 'Wins by not dying.', img('Stone Turtle')),
-    minion('Wolf', 3, 4, 2, 'Trades up.', img('Wolf')),
-    minion('Mirror Soldier', 4, 4, 4, 'Fair statline.', img('Mirror Soldier')),
-    minion('Spectral Bear', 4, 5, 3, 'Pushes damage.', img('Spectral Bear')),
-    minion('Boulder Titan', 5, 6, 5, 'Ends arguments.', img('Boulder Titan')),
-    minion('Ancient Dragon', 7, 8, 8, 'Game ender.', img('Ancient Dragon')),
-  ]
-
-  // Make them larger by repeating.
-  const expand = (base) => {
-    const out = []
-    for (let i = 0; i < 3; i++) {
-      for (const c of base) out.push({ ...c })
-    }
-    return out
+function asMinion(card) {
+  const { atk, hp } = toMvpStats(card)
+  return {
+    type: 'minion',
+    name: card.name,
+    cost: toIntCost(card.cost) || 1,
+    atk,
+    hp,
+    text: `${card.faction} • ${card.type}`,
+    image: card.image || null,
+    artist: card.artist || null,
+    artworkLicensor: card.artworkLicensor || null,
+    arcmageGuid: card.guid,
   }
+}
 
-  return { deckA: expand(deckA), deckB: expand(deckB) }
+function buildRebirthCreaturePool() {
+  return (rebirth.cards || []).filter((c) => (c.type || '').toLowerCase() === 'creature')
+}
+
+function pickFactions(cards) {
+  const seen = new Set()
+  const out = []
+  for (const c of cards) {
+    const f = c.faction || 'Unknown'
+    if (!seen.has(f)) {
+      seen.add(f)
+      out.push(f)
+    }
+    if (out.length >= 2) break
+  }
+  if (out.length === 1) out.push(out[0])
+  return out
+}
+
+function buildDeckFromPool(pool, faction, size = 30) {
+  const filtered = pool.filter((c) => (c.faction || '') === faction)
+  const base = filtered.length ? filtered : pool
+  const out = []
+  for (let i = 0; i < size; i++) {
+    const c = base[i % base.length]
+    out.push(asMinion({ ...c }))
+  }
+  return out
+}
+
+export function sampleDecks() {
+  const pool = buildRebirthCreaturePool()
+
+  // Choose two factions for a simple "you vs enemy" setup.
+  const [f1, f2] = pickFactions(pool)
+
+  // 30-card decks built from Rebirth creatures (by faction) — playable in our simplified rules.
+  const deckA = buildDeckFromPool(pool, f1, 30)
+  const deckB = buildDeckFromPool(pool, f2, 30)
+
+  return { deckA, deckB }
 }
 
 export function shuffle(arr) {
