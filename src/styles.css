@@ -1,7 +1,7 @@
 :root {
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-  color: #eaeaea;
-  background: radial-gradient(1000px 600px at 40% 10%, #262b40, #111318);
+  color: #f3f0e6;
+  background: radial-gradient(1200px 800px at 40% 10%, #2b2d3a, #0b0c10);
 }
 
 * { box-sizing: border-box; }
@@ -40,9 +40,10 @@ body { margin: 0; }
   grid-template-columns: 1fr;
   gap: 10px;
   padding: 12px;
-  border: 1px solid #2a314a;
-  border-radius: 12px;
-  background: rgba(16, 18, 26, 0.65);
+  border: 1px solid rgba(170, 140, 90, 0.35);
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(22, 18, 16, 0.78), rgba(10, 10, 14, 0.85));
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
 }
 
 .boardTitle {
@@ -77,9 +78,93 @@ body { margin: 0; }
 .card {
   width: 220px;
   padding: 10px;
-  border: 1px solid #394265;
-  border-radius: 12px;
-  background: linear-gradient(180deg, rgba(40, 47, 75, 0.7), rgba(20, 23, 34, 0.9));
+  border: 1px solid rgba(205, 170, 105, 0.35);
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(58, 44, 30, 0.55), rgba(18, 16, 18, 0.9));
+  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+  transition: transform 120ms ease, box-shadow 120ms ease, outline-color 120ms ease;
+}
+
+.card:active {
+  transform: scale(0.985);
+}
+
+.card.glow {
+  outline: 2px solid rgba(255, 214, 102, 0.95);
+  box-shadow: 0 0 0 2px rgba(255, 214, 102, 0.25), 0 12px 28px rgba(0,0,0,0.35);
+}
+
+.card.targetable {
+  outline: 2px solid rgba(98, 255, 168, 0.95);
+}
+
+.card.hit {
+  animation: hitShake 220ms ease;
+}
+
+@keyframes hitShake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-3px); }
+  100% { transform: translateX(0); }
+}
+
+.phaseTint {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+.phaseTint.on {
+  opacity: 1;
+}
+
+.phaseBanner {
+  position: fixed;
+  left: 50%;
+  top: 10px;
+  transform: translateX(-50%);
+  z-index: 50;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 214, 102, 0.45);
+  background: rgba(10, 10, 14, 0.85);
+  color: #ffe7a3;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: 0;
+  filter: drop-shadow(0 10px 22px rgba(0,0,0,0.55));
+}
+
+.phaseBanner.show {
+  animation: phasePop 900ms ease;
+}
+
+@keyframes phasePop {
+  0% { opacity: 0; transform: translateX(-50%) translateY(-8px) scale(0.96); }
+  18% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+  80% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(-50%) translateY(-8px) scale(0.98); }
+}
+
+.floatDmg {
+  position: fixed;
+  z-index: 60;
+  font-weight: 900;
+  color: #ffd666;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+  pointer-events: none;
+  animation: floatUp 850ms ease;
+}
+
+@keyframes floatUp {
+  0% { opacity: 0; transform: translate(-50%, 10px) scale(0.9); }
+  15% { opacity: 1; transform: translate(-50%, 0px) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -30px) scale(1.02); }
 }
 
 .cardTitle {
@@ -123,11 +208,15 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 5px 10px;
+  padding: 6px 10px;
   border-radius: 999px;
-  border: 1px solid #394265;
-  background: rgba(24, 28, 42, 0.7);
+  border: 1px solid rgba(205, 170, 105, 0.35);
+  background: rgba(24, 20, 22, 0.65);
   font-size: 12px;
+}
+
+.pill.hit {
+  animation: hitShake 220ms ease;
 }
 
 .selected {

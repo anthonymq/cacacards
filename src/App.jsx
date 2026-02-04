@@ -1,4 +1,40 @@
 import React, { useMemo, useState } from 'react'
+
+function phaseLabel(phase) {
+  switch (phase) {
+    case 'unmark':
+      return 'Unmark'
+    case 'draw_resource':
+      return 'Draw & Resource'
+    case 'tactics':
+      return 'Tactics'
+    case 'play_1':
+      return 'Play'
+    case 'attack':
+      return 'Attack'
+    case 'play_2':
+      return 'Play'
+    case 'discard':
+      return 'Discard'
+    default:
+      return String(phase || '')
+  }
+}
+
+function phaseTintColor(phase) {
+  switch (phase) {
+    case 'draw_resource':
+      return 'rgba(90, 160, 255, 0.10)'
+    case 'play_1':
+    case 'play_2':
+      return 'rgba(180, 120, 255, 0.08)'
+    case 'attack':
+      return 'rgba(255, 90, 90, 0.10)'
+    default:
+      return 'rgba(0,0,0,0)'
+  }
+}
+
 import {
   createInitialState,
   nextPhase,
@@ -87,9 +123,12 @@ function HandCard({ card, onClick, disabled, label, hint }) {
   )
 }
 
-function Creature({ cr, onClick, label }) {
+function Creature({ cr, onClick, label, glow, targetable, hit }) {
+  const cls = ['card', cr.marked ? 'danger' : '', glow ? 'glow' : '', targetable ? 'targetable' : '', hit ? 'hit' : '']
+    .join(' ')
+    .trim()
   return (
-    <div className={['card', cr.marked ? 'danger' : ''].join(' ').trim()}>
+    <div className={cls}>
       <div className="cardTitle">{cr.name}</div>
       <div className="cardMeta">
         <span>{cr.atk}/{cr.def}</span>
@@ -130,6 +169,12 @@ export default function App() {
   const FACTIONS = ['Gaian', 'Dark Legion', 'Red Banner', 'House of Nobles', 'The Empire']
   const [resourceFaction, setResourceFaction] = useState('Gaian')
 
+  // Mobile-first HS-like interactions
+  const [selectedAttackers, setSelectedAttackers] = useState([]) // creature ids
+  const [phaseFlash, setPhaseFlash] = useState(null) // string
+  const [damageFloats, setDamageFloats] = useState([])
+  const [hitIds, setHitIds] = useState([])
+
   // Auto-pick a good default resource faction based on your current hand.
   React.useEffect(() => {
     if (state.current !== 'player') return
@@ -139,6 +184,20 @@ export default function App() {
     if (rec && rec !== resourceFaction) setResourceFaction(rec)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.turn, state.phase, state.current, state.player.drawResourceChoice])
+
+  // Phase change banner + tint cues
+  React.useEffect(() => {
+    setPhaseFlash(phaseLabel(state.phase))
+    const t = setTimeout(() => setPhaseFlash(null), 900)
+    return () => clearTimeout(t)
+  }, [state.phase])
+
+  // Clear attacker selection when leaving attack phase or turn changes
+  React.useEffect(() => {
+    if (state.phase !== 'attack' || state.current !== 'player') {
+      setSelectedAttackers([])
+    }
+  }, [state.phase, state.current])
 
   const you = state.player
   const enemy = state.enemy
@@ -151,6 +210,19 @@ export default function App() {
       nextPhase(s)
       return s
     })
+  }
+
+  const floatDamage = (amount, x, y) => {
+    const id = `${Date.now()}_${Math.random()}`
+    setDamageFloats((arr) => [...arr, { id, amount, x, y }])
+    setTimeout(() => {
+      setDamageFloats((arr) => arr.filter((d) => d.id !== id))
+    }, 850)
+  }
+
+  const hitPulse = (ids) => {
+    setHitIds(ids)
+    setTimeout(() => setHitIds([]), 260)
   }
 
   const advanceUntilPlayerAction = () => {
@@ -179,8 +251,19 @@ export default function App() {
     })
   }
 
+  const tint = phaseTintColor(state.phase)
+
   return (
     <div className="app">
+      <div className={"phaseTint " + (tint !== 'rgba(0,0,0,0)' ? 'on' : '')} style={{ background: tint }} />
+      <div className={"phaseBanner " + (phaseFlash ? 'show' : '')}>{phaseFlash || ''}</div>
+
+      {damageFloats.map((d) => (
+        <div key={d.id} className="floatDmg" style={{ left: d.x, top: d.y }}>
+          -{d.amount}
+        </div>
+      ))}
+
       <div className="topbar">
         <div>
           <div style={{ fontWeight: 800, letterSpacing: 0.3 }}>CacaCards</div>
@@ -319,9 +402,41 @@ export default function App() {
           </div>
         </div>
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-          {enemy.kingdom.map((c) => (
-            <div key={c.id} className="pill">{c.card.name} ({c.currentDefense})</div>
-          ))}
+          {enemy.kingdom.map((c) => {
+            const targetable = isYourTurn && state.phase === 'attack' && selectedAttackers.length > 0
+            const cls = ['pill', targetable ? 'selected' : '', hitIds.includes(c.id) ? 'hit' : ''].join(' ')
+            return (
+              <button
+                key={c.id}
+                className={cls}
+                style={{ cursor: targetable ? 'pointer' : 'default' }}
+                disabled={!targetable}
+                onClick={(event) => {
+                  if (!targetable) return
+
+                  const rect = (event.currentTarget?.getBoundingClientRect?.() || { left: 0, top: 0, width: 0 })
+
+                  // compute damage from currently selected attackers (best-effort)
+                  const dmg = you.army
+                    .filter((a) => selectedAttackers.includes(a.id))
+                    .reduce((s, a) => s + (a.atk || 0), 0)
+
+                  setState((prev) => {
+                    const s = structuredClone(prev)
+                    resolveAttack(s, 'player', selectedAttackers, c.id)
+                    return s
+                  })
+
+                  hitPulse([c.id, ...selectedAttackers])
+                  if (dmg > 0) floatDamage(dmg, rect.left + rect.width / 2, rect.top)
+                  setSelectedAttackers([])
+                }}
+                title={targetable ? 'Tap to attack this city' : undefined}
+              >
+                {c.card.name} ({c.currentDefense})
+              </button>
+            )
+          })}
         </div>
       </div>
 
@@ -404,30 +519,33 @@ export default function App() {
           <div style={{ flex: 1, minWidth: 320 }}>
             <div className="handTitle">Army</div>
             <div className="lanes">
-              {you.army.map((cr) => (
-                <Creature key={cr.id} cr={cr} />
-              ))}
+              {you.army.map((cr) => {
+                const selectable = isYourTurn && state.phase === 'attack' && !cr.marked
+                const selected = selectedAttackers.includes(cr.id)
+                return (
+                  <Creature
+                    key={cr.id}
+                    cr={cr}
+                    glow={selected}
+                    hit={hitIds.includes(cr.id)}
+                    label={selectable ? (selected ? 'Selected' : 'Select') : undefined}
+                    onClick={
+                      selectable
+                        ? () => {
+                            setSelectedAttackers((arr) => (arr.includes(cr.id) ? arr.filter((x) => x !== cr.id) : [...arr, cr.id]))
+                          }
+                        : undefined
+                    }
+                  />
+                )
+              })}
             </div>
 
             {state.phase === 'attack' && isYourTurn ? (
               <div style={{ marginTop: 10, display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
-                <button
-                  onClick={() => {
-                    setState((prev) => {
-                      const s = structuredClone(prev)
-                      const attackers = s.player.army.filter((x) => !x.marked)
-                      const target = s.enemy.kingdom[0]
-                      if (attackers.length && target) {
-                        resolveAttack(s, 'player', attackers.map((a) => a.id), target.id)
-                      }
-                      return s
-                    })
-                  }}
-                  disabled={you.army.filter((x) => !x.marked).length === 0 || enemy.kingdom.length === 0}
-                >
-                  Attack enemy city (auto)
-                </button>
-                <div className="footerHint">(Defender assignment is auto for now.)</div>
+                <div className="footerHint">
+                  Tap your Army creatures to select attackers, then tap an enemy city.
+                </div>
               </div>
             ) : null}
           </div>
