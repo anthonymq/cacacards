@@ -59,8 +59,23 @@ body { margin: 0; }
   gap: 10px;
 }
 
+/* Mobile-friendly horizontal scrolling hand */
+.handCards {
+  display: flex;
+  gap: 10px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  scroll-snap-type: x mandatory;
+}
+
+.handCards > .card {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
 .card {
-  width: 150px;
+  width: 220px;
   padding: 10px;
   border: 1px solid #394265;
   border-radius: 12px;
