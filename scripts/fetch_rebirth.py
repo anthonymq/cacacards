@@ -42,8 +42,13 @@ def main() -> int:
         guid = safe_guid(c.get("guid"))
         name = c.get("name")
         typ = (c.get("type") or {}).get("name") or c.get("subType")
+        sub_type = c.get("subType")
         faction = (c.get("faction") or {}).get("name")
         cost = c.get("cost")
+        loyalty = c.get("loyalty")
+        attack = c.get("attack")
+        defense = c.get("defense")
+        rule_text = c.get("ruleText")
         artist = c.get("artist")
         artwork_licensor = c.get("artworkLicensor")
 
@@ -72,8 +77,13 @@ def main() -> int:
                 "guid": guid,
                 "name": name,
                 "type": typ,
+                "subType": sub_type,
                 "faction": faction,
                 "cost": cost,
+                "loyalty": loyalty,
+                "attack": attack,
+                "defense": defense,
+                "ruleText": rule_text,
                 "artist": artist,
                 "artworkLicensor": artwork_licensor,
                 "image": local_rel,

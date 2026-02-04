@@ -1,222 +1,264 @@
 import React, { useMemo, useState } from 'react'
 import {
-  createGameState,
-  playCard,
-  selectAttacker,
-  attack,
-  endTurn,
-  canPlayCard,
-} from './game.js'
+  createInitialState,
+  nextPhase,
+  playResource,
+  canPlayResource,
+  playCreatureToCity,
+  canPlayCardToCity,
+  moveCreature,
+  resolveAttack,
+} from './engine/arcmage.js'
 
-function ManaBadge({ p }) {
-  return <span className="pill">Mana: {p.mana}/{p.maxMana}</span>
+function Pill({ children }) {
+  return <span className="pill">{children}</span>
 }
 
-function HealthBadge({ p }) {
-  return <span className="pill">HP: {p.health}</span>
-}
-
-function Card({ card, onClick, disabled, selected, danger, actionLabel }) {
-  const cls = ['card', selected ? 'selected' : '', danger ? 'danger' : ''].join(' ').trim()
+function CardImage({ src, alt }) {
+  if (!src) return null
   return (
-    <div className={cls}>
+    <img
+      src={src}
+      alt={alt}
+      style={{ width: '100%', borderRadius: 10, marginTop: 8, border: '1px solid #394265' }}
+      loading="lazy"
+    />
+  )
+}
+
+function HandCard({ card, onClick, disabled, label }) {
+  return (
+    <div className={['card', disabled ? 'danger' : ''].join(' ').trim()}>
       <div className="cardTitle">{card.name}</div>
       <div className="cardMeta">
-        <span>Cost {card.cost}</span>
-        <span>{card.atk}/{card.hp}</span>
+        <span>{card.type}</span>
+        <span>Cost {String(card.cost ?? '')}</span>
       </div>
+      <CardImage src={card.image} alt={card.name} />
+      <div className="cardText" style={{ whiteSpace: 'pre-wrap' }}>{card.ruleText || ''}</div>
+      <div className="cardBtnRow">
+        <button onClick={onClick} disabled={disabled}>
+          {label}
+        </button>
+      </div>
+    </div>
+  )
+}
 
-      {card.image ? (
-        <img
-          src={card.image}
-          alt={card.name}
-          style={{ width: '100%', borderRadius: 10, marginTop: 8, border: '1px solid #394265' }}
-          loading="lazy"
-        />
-      ) : null}
-
-      <div className="cardText">{card.text || ''}</div>
-      {onClick && (
+function Creature({ cr, onClick, label }) {
+  return (
+    <div className={['card', cr.marked ? 'danger' : ''].join(' ').trim()}>
+      <div className="cardTitle">{cr.name}</div>
+      <div className="cardMeta">
+        <span>{cr.atk}/{cr.def}</span>
+        <span>{cr.marked ? 'marked' : 'unmarked'}</span>
+      </div>
+      <CardImage src={cr.card?.image} alt={cr.name} />
+      {onClick ? (
         <div className="cardBtnRow">
-          <button onClick={onClick} disabled={disabled}>
-            {actionLabel}
-          </button>
+          <button onClick={onClick}>{label}</button>
         </div>
-      )}
+      ) : null}
     </div>
   )
 }
 
-function Board({ title, player, isEnemy, state, setState }) {
-  const selectedId = state.selectedAttackerId
-  const canSelect = !isEnemy && state.current === 'player'
-
+function City({ city, children }) {
   return (
-    <div className="board">
+    <div className="board" style={{ marginTop: 12 }}>
       <div className="boardTitle">
-        <div>{title}</div>
+        <div>{city.card.name}</div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-          <HealthBadge p={player} />
-          <ManaBadge p={player} />
-          <span className="pill">Deck: {player.deck.length}</span>
-          <span className="pill">Hand: {player.hand.length}</span>
-          <span className="pill">Board: {player.board.length}/7</span>
+          <Pill>Defense: {city.currentDefense}</Pill>
+          <Pill>Residents: {city.residents.length}</Pill>
         </div>
       </div>
-
-      <div className="lanes">
-        {player.board.map((m) => {
-          const isSelected = selectedId === m.id
-          const actionDisabled = isEnemy ? false : (m.summoningSick || m.exhausted || state.current !== 'player')
-
-          return (
-            <Card
-              key={m.id}
-              card={m}
-              selected={isSelected}
-              danger={isEnemy && selectedId}
-              actionLabel={isEnemy ? 'Target' : (isSelected ? 'Selected' : 'Attack')}
-              onClick={() => {
-                if (isEnemy) {
-                  setState((prev) => {
-                    const s = structuredClone(prev)
-                    attack(s, { kind: 'minion', id: m.id })
-                    return s
-                  })
-                  return
-                }
-                if (!canSelect) return
-                setState((prev) => {
-                  const s = structuredClone(prev)
-                  selectAttacker(s, m.id)
-                  return s
-                })
-              }}
-              disabled={actionDisabled}
-            />
-          )
-        })}
-      </div>
-
-      {isEnemy && (
-        <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
-          <button
-            onClick={() => {
-              setState((prev) => {
-                const s = structuredClone(prev)
-                attack(s, { kind: 'face' })
-                return s
-              })
-            }}
-            disabled={!state.selectedAttackerId || state.gameOver || state.current !== 'player'}
-          >
-            Attack face
-          </button>
-          <div className="footerHint">
-            Tip: Select your attacker (your board), then click an enemy minion or “Attack face”.
-          </div>
-        </div>
-      )}
-    </div>
-  )
-}
-
-function Hand({ state, setState }) {
-  const p = state.player
-  return (
-    <div className="board">
-      <div className="boardTitle">
-        <div>Your hand</div>
-        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-          <span className="pill">Play minions by spending mana</span>
-        </div>
-      </div>
-
-      <div className="lanes">
-        {p.hand.map((c) => {
-          const playable = canPlayCard(state, 'player', c)
-          return (
-            <Card
-              key={c.id}
-              card={c}
-              actionLabel="Play"
-              onClick={() => {
-                setState((prev) => {
-                  const s = structuredClone(prev)
-                  playCard(s, 'player', c.id)
-                  return s
-                })
-              }}
-              disabled={!playable}
-            />
-          )
-        })}
-      </div>
-
-      <div className="footerHint">
-        Rules MVP: 20 HP • mana +1 per turn (max 10) • minions can’t attack the turn they’re played.
-      </div>
+      <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>{children}</div>
     </div>
   )
 }
 
 export default function App() {
-  const initial = useMemo(() => createGameState(), [])
+  const [seed, setSeed] = useState(1)
+  const initial = useMemo(() => createInitialState(), [seed])
   const [state, setState] = useState(initial)
 
-  const banner = (() => {
-    if (state.gameOver) {
-      if (state.winner === 'player') return 'You win.'
-      if (state.winner === 'enemy') return 'You lose.'
-      return 'Draw.'
-    }
-    return `Turn ${state.turn} — ${state.current === 'player' ? 'Your' : 'Enemy'} turn`
-  })()
+  const you = state.player
+  const enemy = state.enemy
+
+  const isYourTurn = state.current === 'player'
+
+  const advance = () => {
+    setState((prev) => {
+      const s = structuredClone(prev)
+      nextPhase(s)
+      return s
+    })
+  }
 
   return (
-    <div className="container">
-      <div className="header">
+    <div className="app">
+      <div className="topbar">
         <div>
-          <div style={{ fontSize: 18, fontWeight: 900 }}>CacaCards</div>
+          <div style={{ fontWeight: 800, letterSpacing: 0.3 }}>CacaCards</div>
           <div style={{ opacity: 0.8, fontSize: 12 }}>
-            A tiny browser card game MVP inspired by arcmage.org — using Rebirth set creature cards (simplified rules)
+            ArcMage rules (1:1 target) — WIP core engine. Assets: see public/arcmage/rebirth/LICENSE.md
           </div>
         </div>
-
-        <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
-          <span className="badge">{banner}</span>
-          <button
-            onClick={() => {
-              setState((prev) => {
-                const s = structuredClone(prev)
-                endTurn(s)
-                return s
-              })
-            }}
-            disabled={state.gameOver || state.current !== 'player'}
-          >
-            End turn
-          </button>
-          <button onClick={() => setState(createGameState())}>New game</button>
+        <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
+          <Pill>Turn {state.turn}</Pill>
+          <Pill>Current: {state.current}</Pill>
+          <Pill>Phase: {state.phase}</Pill>
+          <button onClick={advance} disabled={state.gameOver}>Next phase</button>
+          <button onClick={() => setSeed((x) => x + 1)}>New game</button>
         </div>
       </div>
 
-      <div className="row">
-        <Board title="Enemy" player={state.enemy} isEnemy={true} state={state} setState={setState} />
-        <Board title="You" player={state.player} isEnemy={false} state={state} setState={setState} />
-        <Hand state={state} setState={setState} />
+      {state.gameOver ? (
+        <div className="banner">
+          <div style={{ fontWeight: 800 }}>Game Over</div>
+          <div>{state.winner === 'player' ? 'You win!' : 'You lose.'}</div>
+        </div>
+      ) : null}
 
-        <div className="toast">
-          <div style={{ fontWeight: 800, marginBottom: 6 }}>Log</div>
-          <div style={{ display: 'grid', gap: 4 }}>
-            {state.log.slice(0, 8).map((l, i) => (
-              <div key={i} style={{ opacity: i === 0 ? 1 : 0.85 }}>{l}</div>
+      <div className="board">
+        <div className="boardTitle">
+          <div>Enemy</div>
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+            <Pill>Cities: {enemy.kingdom.length}</Pill>
+            <Pill>Army: {enemy.army.length}</Pill>
+            <Pill>Deck: {enemy.deck.length}</Pill>
+            <Pill>Hand: {enemy.hand.length}</Pill>
+          </div>
+        </div>
+        <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+          {enemy.kingdom.map((c) => (
+            <div key={c.id} className="pill">{c.card.name} ({c.currentDefense})</div>
+          ))}
+        </div>
+      </div>
+
+      <div className="hand">
+        <div className="handTitle">Your hand</div>
+        <div className="handCards">
+          {you.hand.map((c) => {
+            const canRes = canPlayResource(state, 'player')
+            const label = state.phase === 'draw_resource' ? (canRes ? 'Resource' : 'Nope') : 'Play'
+
+            return (
+              <HandCard
+                key={c.id}
+                card={c}
+                label={label}
+                disabled={!isYourTurn || state.gameOver}
+                onClick={() => {
+                  setState((prev) => {
+                    const s = structuredClone(prev)
+                    if (s.current !== 'player') return s
+
+                    if (s.phase === 'draw_resource') {
+                      if (canPlayResource(s, 'player')) {
+                        playResource(s, 'player', c.id, c.faction || 'Dark Legion')
+                      }
+                      return s
+                    }
+
+                    // quick UX: play creature into first city if legal
+                    const city = s.player.kingdom[0]
+                    if (city && canPlayCardToCity(s, 'player', c.id, city.id)) {
+                      playCreatureToCity(s, 'player', c.id, city.id)
+                    }
+                    return s
+                  })
+                }}
+              />
+            )
+          })}
+        </div>
+        <div className="footerHint">
+          WIP: click a card in Draw&Resource phase to turn it into a resource (defaults to the card faction).
+        </div>
+      </div>
+
+      <div className="board">
+        <div className="boardTitle">
+          <div>You</div>
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+            <Pill>Cities: {you.kingdom.length}</Pill>
+            <Pill>Army: {you.army.length}</Pill>
+            <Pill>Deck: {you.deck.length}</Pill>
+            <Pill>Hand: {you.hand.length}</Pill>
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+          <div style={{ flex: 1, minWidth: 320 }}>
+            <div className="handTitle">Army</div>
+            <div className="lanes">
+              {you.army.map((cr) => (
+                <Creature key={cr.id} cr={cr} />
+              ))}
+            </div>
+
+            {state.phase === 'attack' && isYourTurn ? (
+              <div style={{ marginTop: 10, display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
+                <button
+                  onClick={() => {
+                    setState((prev) => {
+                      const s = structuredClone(prev)
+                      const attackers = s.player.army.filter((x) => !x.marked)
+                      const target = s.enemy.kingdom[0]
+                      if (attackers.length && target) {
+                        resolveAttack(s, 'player', attackers.map((a) => a.id), target.id)
+                      }
+                      return s
+                    })
+                  }}
+                  disabled={you.army.filter((x) => !x.marked).length === 0 || enemy.kingdom.length === 0}
+                >
+                  Attack enemy city (auto)
+                </button>
+                <div className="footerHint">(Defender assignment is auto for now.)</div>
+              </div>
+            ) : null}
+          </div>
+
+          <div style={{ flex: 2, minWidth: 360 }}>
+            <div className="handTitle">Kingdom</div>
+            {you.kingdom.map((city) => (
+              <City key={city.id} city={city}>
+                {city.residents.map((cr) => (
+                  <Creature
+                    key={cr.id}
+                    cr={cr}
+                    label="Move to army"
+                    onClick={() => {
+                      setState((prev) => {
+                        const s = structuredClone(prev)
+                        moveCreature(s, 'player', { kind: 'city', cityId: city.id }, { kind: 'army' }, cr.id)
+                        return s
+                      })
+                    }}
+                  />
+                ))}
+              </City>
             ))}
           </div>
         </div>
 
         <div className="footerHint">
-          Disclaimer: not affiliated with arcmage.org — this is a small MVP. Rebirth assets: see <code>public/arcmage/rebirth/LICENSE.md</code>.
+          Target rules: core phases/resources/cities/army/movement/combat from https://arcmage.org/rules/. Next: full draw/resource options, defender assignment UI, loyalty costs, events stack, magic/enchantments.
+        </div>
+      </div>
+
+      <div className="board">
+        <div className="boardTitle">
+          <div>Log</div>
+        </div>
+        <div style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace', fontSize: 12, opacity: 0.9 }}>
+          {state.log.slice(0, 14).map((l, i) => (
+            <div key={i}>{l}</div>
+          ))}
         </div>
       </div>
     </div>
