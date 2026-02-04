@@ -95,6 +95,8 @@ import {
   canPayCardNow,
   moveCreature,
   resolveAttack,
+  setDefenseAssignment,
+  confirmDefense,
   resourceSummary,
   recommendResourceFaction,
 } from './engine/arcmage.js'
@@ -342,6 +344,85 @@ export default function App() {
         <div className={['toast', toast.who === 'enemy' ? 'toastEnemy' : (toast.who === 'player' ? 'toastPlayer' : '')].join(' ')}>
           <div style={{ fontWeight: 900, marginBottom: 2 }}>{toast.who === 'enemy' ? 'ENEMY' : (toast.who === 'player' ? 'YOU' : 'INFO')}</div>
           <div>{toast.text}</div>
+        </div>
+      ) : null}
+
+      {state.pendingDefense && state.pendingDefense.defender === 'player' ? (
+        <div className="board" style={{ position: 'fixed', inset: 12, zIndex: 80, overflow: 'auto' }}>
+          <div className="boardTitle">
+            <div>Defense: assign blockers</div>
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+              <span className="pill" style={{ background: 'rgba(255,90,90,0.12)', borderColor: 'rgba(255,90,90,0.35)' }}>Enemy attacks</span>
+              <span className="pill">Tap attackers then tap defenders</span>
+            </div>
+          </div>
+
+          <div className="footerHint">One defender can block only one attacker. Multiple defenders may block the same attacker (damage split UI later).</div>
+
+          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+            <div style={{ flex: 1, minWidth: 320 }}>
+              <div className="handTitle">Attackers</div>
+              <div className="lanes">
+                {state.enemy.army
+                  .filter((a) => state.pendingDefense.attackerIds.includes(a.id))
+                  .map((a) => (
+                    <Creature
+                      key={a.id}
+                      cr={a}
+                      glow={selectedAttackers.includes(a.id)}
+                      label={selectedAttackers.includes(a.id) ? 'Selected' : 'Select'}
+                      onClick={() => {
+                        setSelectedAttackers((arr) => (arr.includes(a.id) ? arr.filter((x) => x !== a.id) : [a.id]))
+                      }}
+                    />
+                  ))}
+              </div>
+            </div>
+
+            <div style={{ flex: 1, minWidth: 320 }}>
+              <div className="handTitle">Defenders (your unmarked Army + city residents)</div>
+              <div className="lanes">
+                {[...state.player.army, ...state.player.kingdom.flatMap((c) => c.residents)]
+                  .filter((d) => !d.marked)
+                  .map((d) => {
+                    // show assigned state
+                    const assignedTo = Object.entries(state.pendingDefense.assignments || {}).find(([, ids]) => (ids || []).includes(d.id))?.[0]
+                    const isAssigned = !!assignedTo
+                    return (
+                      <Creature
+                        key={d.id}
+                        cr={d}
+                        glow={isAssigned}
+                        label={selectedAttackers.length === 1 ? (isAssigned ? `Blocking` : 'Block') : (isAssigned ? 'Blocking' : 'Pick attacker')}
+                        onClick={() => {
+                          if (selectedAttackers.length !== 1) return
+                          setState((prev) => {
+                            const s = structuredClone(prev)
+                            setDefenseAssignment(s, selectedAttackers[0], d.id)
+                            return s
+                          })
+                        }}
+                      />
+                    )
+                  })}
+              </div>
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', gap: 10, marginTop: 12, flexWrap: 'wrap' }}>
+            <button
+              onClick={() => {
+                setState((prev) => {
+                  const s = structuredClone(prev)
+                  confirmDefense(s)
+                  return s
+                })
+                setSelectedAttackers([])
+              }}
+            >
+              Confirm defense
+            </button>
+          </div>
         </div>
       ) : null}
 
