@@ -84,6 +84,7 @@ export default function App() {
   const [seed, setSeed] = useState(1)
   const initial = useMemo(() => createInitialState(), [seed])
   const [state, setState] = useState(initial)
+  const [resourceFaction, setResourceFaction] = useState('Gaian')
 
   const you = state.player
   const enemy = state.enemy
@@ -150,7 +151,20 @@ export default function App() {
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
               <Pill>Choice: {you.drawResourceChoice || '—'}</Pill>
               <Pill>Resources this turn: {you.resourcesPlayedThisTurn}/{you.resourcesMaxThisTurn}</Pill>
+              <Pill>Next resource faction: {resourceFaction}</Pill>
             </div>
+          </div>
+
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+            {['Gaian', 'Dark Legion', 'Red Banner', 'House of Nobles', 'The Empire'].map((f) => (
+              <button
+                key={f}
+                onClick={() => setResourceFaction(f)}
+                disabled={resourceFaction === f}
+              >
+                {f}
+              </button>
+            ))}
           </div>
 
           {you.drawResourceChoice == null ? (
@@ -251,7 +265,8 @@ export default function App() {
 
                     if (s.phase === 'draw_resource') {
                       if (canPlayResource(s, 'player')) {
-                        playResource(s, 'player', c.id, c.faction || 'Dark Legion')
+                        // In ArcMage rules, a resource can be of any faction (not necessarily the card's faction)
+                        playResource(s, 'player', c.id, resourceFaction)
                       }
                       return s
                     }
@@ -271,7 +286,7 @@ export default function App() {
           })}
         </div>
         <div className="footerHint">
-          WIP: click a card in Draw&Resource phase to turn it into a resource (defaults to the card faction).
+          In Draw&Resource: choose an option, then click cards to turn them into resources. You can pick the resource faction above (ArcMage lets you choose any faction).
         </div>
       </div>
 
