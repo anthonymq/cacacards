@@ -71,6 +71,10 @@ export function createInitialState() {
       name,
       // resources: { [faction]: { cards: [{id, marked}] } }
       resources: {},
+      // Draw&Resource phase choice for the current turn
+      drawResourceChoice: null, // 'draw2' | 'draw1_play1' | 'draw0_play2'
+      drawsRemainingThisPhase: 0,
+      resourcesMaxThisTurn: 0,
       resourcesPlayedThisTurn: 0,
       // Kingdom: cities in play
       kingdom: [], // [{ card, id, currentDefense, residents: [creatureId], devoted: Set(residentId) }]
@@ -126,6 +130,63 @@ export function drawCard(state, who) {
   p.hand.push({ ...card, id: uid('h') })
 }
 
+export function canChooseDrawResourceOption(state, who, option) {
+  if (state.gameOver) return false
+  if (state.current !== who) return false
+  if (state.phase !== 'draw_resource') return false
+
+  const p = state[who]
+  if (p.drawResourceChoice != null) return false
+
+  const handEmpty = p.hand.length === 0
+
+  if (option === 'draw2') {
+    // If player has no cards in hand, must draw at least one card (this option draws 2) => allowed.
+    return true
+  }
+
+  if (option === 'draw1_play1') {
+    // Allowed always (draw >= 1)
+    return true
+  }
+
+  if (option === 'draw0_play2') {
+    // Not allowed if hand is empty (must draw at least one).
+    if (handEmpty) return false
+    // Not allowed if can't play 2 resources (need at least 2 cards in hand)
+    return p.hand.length >= 2
+  }
+
+  return false
+}
+
+export function chooseDrawResourceOption(state, who, option) {
+  if (!canChooseDrawResourceOption(state, who, option)) return
+  const p = state[who]
+
+  p.drawResourceChoice = option
+  p.resourcesPlayedThisTurn = 0
+
+  if (option === 'draw2') {
+    p.drawsRemainingThisPhase = 2
+    p.resourcesMaxThisTurn = 0
+  } else if (option === 'draw1_play1') {
+    p.drawsRemainingThisPhase = 1
+    p.resourcesMaxThisTurn = 1
+  } else if (option === 'draw0_play2') {
+    p.drawsRemainingThisPhase = 0
+    p.resourcesMaxThisTurn = 2
+  }
+
+  // Draw all cards at once
+  for (let i = 0; i < p.drawsRemainingThisPhase; i++) {
+    drawCard(state, who)
+  }
+  p.drawsRemainingThisPhase = 0
+
+  state.log.unshift(`${p.name} chooses Draw&Resource: ${option}.`)
+}
+
 function ensureFactionResource(p, faction) {
   if (!p.resources[faction]) p.resources[faction] = { cards: [] }
   return p.resources[faction]
@@ -136,7 +197,8 @@ export function canPlayResource(state, who) {
   if (state.current !== who) return false
   if (state.phase !== 'draw_resource') return false
   const p = state[who]
-  return p.resourcesPlayedThisTurn < 2 && p.hand.length > 0
+  if (p.drawResourceChoice == null) return false
+  return p.resourcesPlayedThisTurn < p.resourcesMaxThisTurn && p.hand.length > 0
 }
 
 export function playResource(state, who, handCardId, chosenFaction) {
@@ -182,6 +244,9 @@ export function unmarkAll(state, who) {
     city.devotedIds = new Set()
   }
   p.resourcesPlayedThisTurn = 0
+  p.resourcesMaxThisTurn = 0
+  p.drawResourceChoice = null
+  p.drawsRemainingThisPhase = 0
 }
 
 function cityDefenseBase(card) {
@@ -268,20 +333,38 @@ export function canPlayCardToCity(state, who, handCardId, cityId) {
   const city = p.kingdom.find((c) => c.id === cityId)
   if (!city) return false
 
-  // Resource payment (simplified): pay total cost from any factions for now.
+  // Resource payment with loyalty (rules):
   const cost = nint(card.cost, 0)
   if (cost <= 0) return false
 
-  const totalAvailable = Object.keys(p.resources).reduce((acc, f) => acc + availableResources(p, f), 0)
-  if (totalAvailable < cost) return false
+  const faction = card.faction || 'Unknown'
+  const loyalty = nint(card.loyalty, 0)
+
+  if (!canPayCostWithLoyalty(p, faction, cost, loyalty)) return false
 
   return true
 }
 
-export function payGenericCost(state, who, cost) {
-  // For now, generic payment. Loyalty rules TODO.
-  const p = state[who]
-  let remaining = cost
+function canPayCostWithLoyalty(p, faction, cost, loyalty) {
+  const totalAvailable = Object.keys(p.resources).reduce((acc, f) => acc + availableResources(p, f), 0)
+  if (totalAvailable < cost) return false
+
+  const loy = Math.max(0, Math.min(cost, nint(loyalty, 0)))
+  const factionAvail = availableResources(p, faction)
+  return factionAvail >= loy
+}
+
+function payCostWithLoyalty(p, faction, cost, loyalty) {
+  const loy = Math.max(0, Math.min(cost, nint(loyalty, 0)))
+
+  // 1) pay loyalty portion from the card's own faction
+  if (loy > 0) {
+    const ok = markResources(p, faction, loy)
+    if (!ok) return false
+  }
+
+  // 2) pay remainder from any factions
+  let remaining = cost - loy
   for (const f of Object.keys(p.resources)) {
     if (remaining <= 0) break
     const can = availableResources(p, f)
@@ -291,6 +374,7 @@ export function payGenericCost(state, who, cost) {
       remaining -= use
     }
   }
+
   return remaining === 0
 }
 
@@ -301,7 +385,9 @@ export function playCreatureToCity(state, who, handCardId, cityId) {
   const card = p.hand[idx]
 
   const cost = nint(card.cost, 0)
-  if (!payGenericCost(state, who, cost)) return
+  const faction = card.faction || 'Unknown'
+  const loyalty = nint(card.loyalty, 0)
+  if (!payCostWithLoyalty(p, faction, cost, loyalty)) return
 
   p.hand.splice(idx, 1)
   const inst = buildCreatureInstance(card)
@@ -547,7 +633,11 @@ export function nextPhase(state) {
   }
 
   if (state.phase === 'draw_resource') {
-    // draw/resource choice (UI/AI). For now: auto draw 1 for human too.
+    const p = state[state.current]
+    p.drawResourceChoice = null
+    p.drawsRemainingThisPhase = 0
+    p.resourcesPlayedThisTurn = 0
+    p.resourcesMaxThisTurn = 0
   }
 
   // AI autoplay if enemy
@@ -589,13 +679,18 @@ function runEnemyAI(state) {
   }
 
   if (state.phase === 'draw_resource') {
-    // Simple choice: draw 1, play 1 resource if possible.
-    drawCard(state, who)
-    if (p.hand.length > 0 && p.resourcesPlayedThisTurn < 1) {
-      // choose faction of first card (or fallback)
+    // Simple choice: draw 1 + play 1 resource (default), unless hand too small.
+    if (canChooseDrawResourceOption(state, who, 'draw1_play1')) {
+      chooseDrawResourceOption(state, who, 'draw1_play1')
+    } else {
+      chooseDrawResourceOption(state, who, 'draw2')
+    }
+
+    if (p.hand.length > 0 && canPlayResource(state, who)) {
       const f = p.hand[0].faction || 'Dark Legion'
       playResource(state, who, p.hand[0].id, f)
     }
+
     nextPhase(state)
     return
   }
