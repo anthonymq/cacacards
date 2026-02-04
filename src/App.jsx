@@ -31,6 +31,38 @@ function CardImage({ src, alt }) {
   )
 }
 
+function factionColor(f) {
+  switch (f) {
+    case 'Gaian':
+      return '#2ecc71'
+    case 'Dark Legion':
+      return '#2d3436'
+    case 'Red Banner':
+      return '#ff4d4d'
+    case 'House of Nobles':
+      return '#3498db'
+    case 'The Empire':
+      return '#ecf0f1'
+    default:
+      return '#9b59b6'
+  }
+}
+
+function FactionBadge({ faction }) {
+  const f = faction || 'Unknown'
+  const bg = factionColor(f)
+  const fg = f === 'The Empire' ? '#111' : '#fff'
+  return (
+    <span
+      className="pill"
+      title={`Faction: ${f}`}
+      style={{ borderColor: bg, color: fg, background: bg, fontWeight: 800 }}
+    >
+      {f}
+    </span>
+  )
+}
+
 function HandCard({ card, onClick, disabled, label, hint }) {
   return (
     <div className={['card', disabled ? 'danger' : ''].join(' ').trim()}>
@@ -38,6 +70,10 @@ function HandCard({ card, onClick, disabled, label, hint }) {
       <div className="cardMeta">
         <span>{card.type}</span>
         <span>Cost {String(card.cost ?? '')}</span>
+      </div>
+      <div style={{ marginTop: 6, display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+        <FactionBadge faction={card.faction} />
+        {card.loyalty != null ? <span className="pill" title="Loyalty requirement">Loyalty: {card.loyalty}</span> : null}
       </div>
       <CardImage src={card.image} alt={card.name} />
       <div className="cardText" style={{ whiteSpace: 'pre-wrap' }}>{card.ruleText || ''}</div>
@@ -58,6 +94,9 @@ function Creature({ cr, onClick, label }) {
       <div className="cardMeta">
         <span>{cr.atk}/{cr.def}</span>
         <span>{cr.marked ? 'marked' : 'unmarked'}</span>
+      </div>
+      <div style={{ marginTop: 6, display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+        <FactionBadge faction={cr.faction} />
       </div>
       <CardImage src={cr.card?.image} alt={cr.name} />
       {onClick ? (
