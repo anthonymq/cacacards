@@ -4,6 +4,8 @@ import {
   nextPhase,
   playResource,
   canPlayResource,
+  canChooseDrawResourceOption,
+  chooseDrawResourceOption,
   playCreatureToCity,
   canPlayCardToCity,
   moveCreature,
@@ -114,6 +116,56 @@ export default function App() {
         </div>
       </div>
 
+      {isYourTurn && state.phase === 'draw_resource' && !state.gameOver ? (
+        <div className="board" style={{ marginTop: 12 }}>
+          <div className="boardTitle">
+            <div>Draw & Resource</div>
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+              <Pill>Choice: {you.drawResourceChoice || '—'}</Pill>
+              <Pill>Resources this turn: {you.resourcesPlayedThisTurn}/{you.resourcesMaxThisTurn}</Pill>
+            </div>
+          </div>
+
+          {you.drawResourceChoice == null ? (
+            <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+              <button
+                onClick={() => setState((prev) => {
+                  const s = structuredClone(prev)
+                  chooseDrawResourceOption(s, 'player', 'draw2')
+                  return s
+                })}
+                disabled={!canChooseDrawResourceOption(state, 'player', 'draw2')}
+              >
+                Draw 2 (no resources)
+              </button>
+              <button
+                onClick={() => setState((prev) => {
+                  const s = structuredClone(prev)
+                  chooseDrawResourceOption(s, 'player', 'draw1_play1')
+                  return s
+                })}
+                disabled={!canChooseDrawResourceOption(state, 'player', 'draw1_play1')}
+              >
+                Draw 1 + play 1 resource
+              </button>
+              <button
+                onClick={() => setState((prev) => {
+                  const s = structuredClone(prev)
+                  chooseDrawResourceOption(s, 'player', 'draw0_play2')
+                  return s
+                })}
+                disabled={!canChooseDrawResourceOption(state, 'player', 'draw0_play2')}
+              >
+                Draw 0 + play 2 resources
+              </button>
+              <div className="footerHint">After choosing, click cards in hand to convert them into resources.</div>
+            </div>
+          ) : (
+            <div className="footerHint">Now click cards in hand to convert them into resources (up to the limit).</div>
+          )}
+        </div>
+      ) : null}
+
       {state.gameOver ? (
         <div className="banner">
           <div style={{ fontWeight: 800 }}>Game Over</div>
@@ -143,14 +195,15 @@ export default function App() {
         <div className="handCards">
           {you.hand.map((c) => {
             const canRes = canPlayResource(state, 'player')
-            const label = state.phase === 'draw_resource' ? (canRes ? 'Resource' : 'Nope') : 'Play'
+            const inDR = state.phase === 'draw_resource'
+            const label = inDR ? (canRes ? 'Resource' : (you.drawResourceChoice ? 'Limit reached' : 'Choose option')) : 'Play'
 
             return (
               <HandCard
                 key={c.id}
                 card={c}
                 label={label}
-                disabled={!isYourTurn || state.gameOver}
+                disabled={!isYourTurn || state.gameOver || (inDR && !canRes)}
                 onClick={() => {
                   setState((prev) => {
                     const s = structuredClone(prev)
