@@ -633,8 +633,19 @@ function resolveAttackWithAssignments(state, who, attackerIds, targetCityId, ass
     const dmgToAttacker = defs.reduce((s, d) => s + d.atk, 0)
     a.damage += dmgToAttacker
 
-    // distribute all attacker damage to the first defender (UI for split TBD)
-    defs[0].damage += a.atk
+    // distribute attacker damage across multiple defenders.
+    // ArcMage: attacker chooses distribution. Until UI exists, we use a deterministic policy:
+    // put damage into defenders in order, trying to kill earlier defenders first.
+    let remaining = a.atk
+    for (const d of defs) {
+      if (remaining <= 0) break
+      const toKill = Math.max(0, d.def - d.damage)
+      const dealt = toKill > 0 ? Math.min(remaining, toKill) : remaining
+      d.damage += dealt
+      remaining -= dealt
+    }
+    // if any damage remains (all would-be-kills filled), dump into first defender
+    if (remaining > 0 && defs[0]) defs[0].damage += remaining
 
     state.log.unshift(`${atkP.name}'s ${a.name} battles ${defs.map((d) => d.name).join(', ')}.`)
   }
