@@ -21,3 +21,4 @@ Then open the URL printed by Vite (default: http://localhost:5173).
 
 ## Notes
 This is a minimal prototype to iterate on (UI + rules can evolve).
+\n\n## Dev\n\nThis PR adds the initial React MVP.\n
