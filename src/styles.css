@@ -234,11 +234,31 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
 }
 
 .toast {
-  margin-top: 10px;
-  padding: 10px;
-  border-radius: 12px;
-  border: 1px solid #394265;
-  background: rgba(24, 28, 42, 0.85);
+  position: fixed;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  z-index: 70;
+  width: min(520px, calc(100vw - 24px));
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(205, 170, 105, 0.35);
+  background: rgba(10, 10, 14, 0.88);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.55);
+  animation: toastIn 180ms ease;
+}
+
+.toastEnemy {
+  border-color: rgba(255, 90, 90, 0.55);
+}
+
+.toastPlayer {
+  border-color: rgba(98, 255, 168, 0.55);
+}
+
+@keyframes toastIn {
+  0% { opacity: 0; transform: translateX(-50%) translateY(6px) scale(0.98); }
+  100% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
 }
 
 @media (min-width: 900px) {
