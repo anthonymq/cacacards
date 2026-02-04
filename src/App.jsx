@@ -98,6 +98,32 @@ export default function App() {
     })
   }
 
+  const advanceUntilPlayerAction = () => {
+    setState((prev) => {
+      const s = structuredClone(prev)
+
+      // Advance until we hit a phase where the player has something meaningful to do,
+      // or until game ends.
+      // Player action phases: draw_resource (needs choice), play_1, attack, play_2, discard (if >7)
+      for (let guard = 0; guard < 50; guard++) {
+        if (s.gameOver) break
+        if (s.current !== 'player') {
+          nextPhase(s)
+          continue
+        }
+
+        if (s.phase === 'draw_resource' && s.player.drawResourceChoice == null) break
+        if (s.phase === 'play_1' || s.phase === 'attack' || s.phase === 'play_2') break
+        if (s.phase === 'discard' && s.player.hand.length > 7) break
+
+        // otherwise just keep stepping
+        nextPhase(s)
+      }
+
+      return s
+    })
+  }
+
   return (
     <div className="app">
       <div className="topbar">
@@ -111,6 +137,7 @@ export default function App() {
           <Pill>Turn {state.turn}</Pill>
           <Pill>Current: {state.current}</Pill>
           <Pill>Phase: {state.phase}</Pill>
+          <button onClick={advanceUntilPlayerAction} disabled={state.gameOver}>Continue</button>
           <button onClick={advance} disabled={state.gameOver}>Next phase</button>
           <button onClick={() => setSeed((x) => x + 1)}>New game</button>
         </div>
@@ -315,7 +342,7 @@ export default function App() {
         </div>
 
         <div className="footerHint">
-          Target rules: core phases/resources/cities/army/movement/combat from https://arcmage.org/rules/. Next: full draw/resource options, defender assignment UI, loyalty costs, events stack, magic/enchantments.
+          Tip: use <b>Continue</b> to auto-advance through non-interactive phases. Rules source: https://arcmage.org/rules/
         </div>
       </div>
 
