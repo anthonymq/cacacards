@@ -206,11 +206,20 @@ export default function App() {
           </div>
         </div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-          {resourceSummary(you, FACTIONS).map((r) => (
-            <span key={r.faction} className="pill">
-              {r.faction}: {r.avail}/{r.total}
-            </span>
-          ))}
+          {resourceSummary(you, FACTIONS).map((r) => {
+            const bg = factionColor(r.faction)
+            const fg = r.faction === 'The Empire' ? '#111' : '#fff'
+            return (
+              <span
+                key={r.faction}
+                className="pill"
+                title={`Resources: ${r.faction} (available/total)`}
+                style={{ borderColor: bg, background: bg, color: fg, fontWeight: 800 }}
+              >
+                {r.faction}: {r.avail}/{r.total}
+              </span>
+            )
+          })}
         </div>
       </div>
 
